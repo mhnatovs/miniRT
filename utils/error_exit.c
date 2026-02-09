@@ -1,8 +1,9 @@
 #include "minirt.h"
 
-void    error_exit(int code)
+void    error_exit(char *msg)
 {
-    if (code == -1)
-        write (STDERR_FILENO, "Error: memory allocation\n", 25);
-    exit(code);
+    if (msg)
+        write (STDERR_FILENO, msg, ft_strlen(msg));
+    write (STDERR_FILENO, "\n", 1);
+    exit(1);
 }

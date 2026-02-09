@@ -8,7 +8,11 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# include "MLX42.h"
+# include "MLX42/MLX42.h"
 # include "vector.h"
+# include "parser.h"
+# include "../libft/libft.h"
 
-#endif
+void	error_exit(char *msg);
+
+#endif	

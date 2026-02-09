@@ -6,10 +6,13 @@ CFLAGS = -Wall -Wextra -Werror
 # ================= FILES =================
 
 SRCS = \
-	src/main.c
+	src/main.c \
+	src/parser/parser.c \
+	utils/parser_utils.c \
+	utils/error_exit.c
 
 OBJDIR = obj
-OBJS = $(SRCS:src/%.c=$(OBJDIR)/%.o)
+OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # ================= LIBFT =================
 
@@ -26,7 +29,7 @@ MLX42_FLAGS = -ldl -lglfw -pthread -lm
 # ================= INCLUDES ==============
 
 INCLUDES = \
-	-I includes \
+	-I include \
 	-I $(LIBFT_DIR) \
 	-I $(MLX42_DIR)/include
 
@@ -37,7 +40,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(MLX42_LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
 
-$(OBJDIR)/%.o: src/%.c
+$(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
@@ -62,7 +65,7 @@ fclean: clean
 
 re: fclean all
 
-valgrind:
+v:
 	valgrind --leak-check=full --track-fds=yes ./$(NAME)
 
-.PHONY: all clean fclean re valgrind
+.PHONY: all clean fclean re v
