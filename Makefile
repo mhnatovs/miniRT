@@ -3,47 +3,66 @@ NAME = miniRT
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c
+# ================= FILES =================
+
+SRCS = \
+	src/main.c
+
 OBJDIR = obj
-OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
+OBJS = $(SRCS:src/%.c=$(OBJDIR)/%.o)
+
+# ================= LIBFT =================
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-INCLUDES = -I include -I $(LIBFT_DIR)
+# ================= MLX42 =================
+
+MLX42_DIR = MLX42
+MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
+
+MLX42_FLAGS = -ldl -lglfw -pthread -lm
+
+# ================= INCLUDES ==============
+
+INCLUDES = \
+	-I includes \
+	-I $(LIBFT_DIR) \
+	-I $(MLX42_DIR)/include
+
+# ================= RULES =================
 
 all: $(NAME)
-	@echo "$(G)[SUCCESS]$(NC) miniRT compiled!"
 
-$(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT) $(MLX42_LIB)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
 
-$(OBJDIR)/%.o: %.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJDIR)/%.o: src/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+# ================= LIB RULES =============
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR)
 
-G = \033[0;32m
-R = \033[0;31m
-Y = \033[0;33m
-B = \033[0;34m
-NC = \033[0m
+$(MLX42_LIB):
+	cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build
+	cmake --build $(MLX42_DIR)/build
 
-clean c:
-	@$(MAKE) -C $(LIBFT_DIR) clean
-	@rm -f $(OBJS)
-	@echo "$(Y)[CLEAN]$(NC) Objects deleted!"
+# ================= CLEAN =================
 
-fclean f: clean
-	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@rm -f $(NAME)
-	@echo "$(R)[FCLEAN]$(NC) $(NAME) has been deleted!"
+clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJDIR)
+
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
 
 re: fclean all
 
-valgrind v: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./$(NAME)
+valgrind:
+	valgrind --leak-check=full --track-fds=yes ./$(NAME)
 
-.PHONY: all clean fclean re c f v
+.PHONY: all clean fclean re valgrind
