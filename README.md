@@ -41,6 +41,6 @@ The project uses `.rt` files to define scenes. Each line represents a scene elem
 - [Ray Tracing in One Weekend](https://raytracing.github.io/): A popular tutorial series for building a ray tracer from scratch.
 
 ### AI Usage
-
+cc
 
 ## Features
