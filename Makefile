@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = \
 	src/main.c \
 	src/parser/parser.c \
-	utils/parser_utils.c \
+	src/parser/parser_utils.c \
 	utils/error_exit.c
 
 OBJDIR = obj

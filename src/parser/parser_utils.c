@@ -59,6 +59,9 @@ t_color	parse_color(char *str)
 	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255
 		|| color.b < 0 || color.b > 255)
 		error_exit("Error: Color values must be in range [0, 255]");
+	color.r = (float)color.r / 255.0;
+	color.g = (float)color.g / 255.0;
+	color.b = (float)color.b / 255.0;	
 	ft_free_tab(rgb);
 	return (color);
 }

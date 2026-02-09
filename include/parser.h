@@ -3,9 +3,9 @@
 
 typedef struct s_color
 {
-	float	r;
-	float	g;
-	float	b;
+	int		r;
+	int		g;
+	int		b;
 }				t_color;
 
 typedef struct s_ambient
