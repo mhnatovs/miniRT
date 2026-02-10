@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:04:33 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/10 12:50:31 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:57:35 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ static void	parse_line(char *line, t_scene *scene)
 		parse_camera(tokens, scene);
 	else if (ft_strcmp(tokens[0], "L") == 0)
 		parse_light(tokens, scene);
+	else if (ft_strcmp(tokens[0], "sp") == 0)
+		parse_sphere(tokens, scene);
+	else if (ft_strcmp(tokens[0], "pl") == 0)
+		parse_plane(tokens, scene);
+	else if (ft_strcmp(tokens[0], "cy") == 0)
+		parse_cylinder(tokens, scene);
+	else
+		error_exit("Error: Unknown identifier in scene file");
 	ft_free_tab(tokens);
 }
 

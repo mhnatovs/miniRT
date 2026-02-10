@@ -8,6 +8,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = \
 	src/main.c \
 	src/parser/parser.c \
+	src/parser/parser_objects.c \
 	src/parser/parser_utils.c \
 	utils/error_exit.c
 
@@ -36,36 +37,43 @@ INCLUDES = \
 # ================= RULES =================
 
 all: $(NAME)
-
+	@echo "$(G)[SUCCESS]$(NC) miniRT compiled!"
 $(NAME): $(OBJS) $(LIBFT) $(MLX42_LIB)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
-
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
 $(OBJDIR)/%.o: %.c
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # ================= LIB RULES =============
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
 $(MLX42_LIB):
-	cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build
-	cmake --build $(MLX42_DIR)/build
+	@cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build
+	@cmake --build $(MLX42_DIR)/build
 
 # ================= CLEAN =================
 
+G = \033[0;32m
+R = \033[0;31m
+Y = \033[0;33m
+B = \033[0;34m
+NC = \033[0m
+
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
-	rm -rf $(OBJDIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
+	@rm -rf $(OBJDIR)
+	@echo "$(Y)[CLEAN]$(NC) Objects deleted!"
 
 fclean: clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
+	@rm -f $(NAME)
+	@echo "$(R)[FCLEAN]$(NC) $(NAME) has been deleted!"
 
 re: fclean all
 
-v:
+v: $(NAME)
 	valgrind --leak-check=full --track-fds=yes ./$(NAME)
 
 .PHONY: all clean fclean re v

@@ -6,15 +6,15 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:05:00 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/10 12:33:19 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:58:03 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "vector.h"
 # include "../libft/libft.h"
+# include "vector.h"
 
 typedef struct s_color
 {
@@ -51,10 +51,56 @@ typedef struct s_scene
 	t_list			*objects;
 }					t_scene;
 
+typedef struct s_sphere
+{
+	t_vector		center;
+	float			radius;
+	t_color			color;
+}					t_sphere;
+
+typedef struct s_plane
+{
+	t_vector		point;
+	t_vector		normal;
+	t_color			color;
+}					t_plane;
+
+typedef struct s_cylinder
+{
+	t_vector		base;
+	t_vector		dir;
+	float			radius;
+	float			height;
+	t_color			color;
+}					t_cylinder;
+
+typedef enum e_object_type
+{
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER
+}					t_object_type;
+
+typedef struct s_object
+{
+	int				type;
+	t_color			color;
+	union			u_data
+	{
+		t_sphere	sphere;
+		t_plane		plane;
+		t_cylinder	cylinder;
+	} data;
+	struct s_object	*next;
+}					t_object;
+
 t_color				parse_color(char *str);
 t_vector			parse_vector(char *str);
 void				ft_free_tab(char **tab);
 float				ft_atof(const char *str);
+void				parse_sphere(char **tokens, t_scene *scene);
+void				parse_plane(char **tokens, t_scene *scene);
+void				parse_cylinder(char **tokens, t_scene *scene);
 int					init_parser(char *file, t_scene *scene);
 
 #endif
