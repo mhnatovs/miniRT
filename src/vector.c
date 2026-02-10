@@ -6,7 +6,10 @@ t_vector	*new_vector(float x, float y, float z)
 
 	vec = malloc(sizeof(t_vector));
 	if (!vec)
-		return (error_exit(-1));
+	{
+		error_exit(-1);
+		return (NULL);
+	}
 	vec->x = x;
 	vec->y = y;
 	vec->z = z;
