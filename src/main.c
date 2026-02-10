@@ -1,9 +1,9 @@
 #include <MLX42/MLX42.h>
 #include <stdlib.h>
 
-int main(void)
+int	main(void)
 {
-	mlx_t *mlx;
+	mlx_t	*mlx;
 
 	mlx = mlx_init(800, 600, "miniRT", false);
 	if (!mlx)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/10 12:04:43 by jiyawang          #+#    #+#             */
+/*   Updated: 2026/02/10 12:17:30 by jiyawang         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	ft_free_tab(char **tab)
@@ -20,25 +32,23 @@ float	ft_atof(const char *str)
 	float	res;
 	float	decimal;
 	int		sign;
-	int		i;
 
 	res = 0.0;
 	sign = 1;
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-		if (str[i++] == '-')
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+		if (*str++ == '-')
 			sign = -1;
-	while (str[i] >= '0' && str[i] <= '9')
-		res = res * 10.0 + (str[i++] - '0');
-	if (str[i] == '.')
+	while (*str >= '0' && *str <= '9')
+		res = res * 10.0 + (*str++ - '0');
+	if (*str == '.')
 	{
 		decimal = 0.1;
-		i++;
-		while (str[i] >= '0' && str[i] <= '9')
+		str++;
+		while (*str >= '0' && *str <= '9')
 		{
-			res += (str[i++] - '0') * decimal;
+			res += (*str++ - '0') * decimal;
 			decimal /= 10.0;
 		}
 	}
@@ -61,7 +71,7 @@ t_color	parse_color(char *str)
 		error_exit("Error: Color values must be in range [0, 255]");
 	color.r = (float)color.r / 255.0;
 	color.g = (float)color.g / 255.0;
-	color.b = (float)color.b / 255.0;	
+	color.b = (float)color.b / 255.0;
 	ft_free_tab(rgb);
 	return (color);
 }
