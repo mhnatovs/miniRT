@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:05:14 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/10 12:05:16 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/12 19:05:58 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+# define WIDTH 800
+# define HEIGHT 600
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -24,6 +31,7 @@
 # include "vector.h"
 # include "parser.h"
 # include "../libft/libft.h"
+# include "ray.h"
 
 void	error_exit(char *msg);
 
