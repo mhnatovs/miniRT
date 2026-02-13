@@ -42,9 +42,11 @@ INCLUDES = \
 # ================= RULES =================
 
 all: $(NAME)
-	@echo "$(G)[SUCCESS]$(NC) miniRT compiled!"
+
 $(NAME): $(OBJS) $(LIBFT) $(MLX42_LIB)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
+	@echo "$(G)[SUCCESS]$(NC) miniRT compiled!"
+
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -55,8 +57,8 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
 $(MLX42_LIB):
-	@cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build
-	@cmake --build $(MLX42_DIR)/build
+	@cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build >/dev/null
+	@cmake --build $(MLX42_DIR)/build >/dev/null
 
 # ================= CLEAN =================
 
