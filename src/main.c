@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 21:18:42 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/13 15:55:49 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:15:40 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	render_scene(mlx_image_t *img, t_scene scene)
 				}
 			}
 			if (t > 0)
-				color = 0xFF0000FF;
+				color = 0x0F0000FF;
 			else
-				color = 0x000000FF;
+				color = 0x00000000;
 			mlx_put_pixel(img, x, y, color);
 		}
 	}
