@@ -6,11 +6,47 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 21:18:42 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/12 21:19:02 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:55:49 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+// will change this function later
+void	render_scene(mlx_image_t *img, t_scene scene)
+{
+	int			x;
+	int			y;
+	t_viewport	vp;
+	t_ray		ray;
+	float		t;
+	uint32_t	color;
+
+	vp = init_viewport(scene.camera);
+	for (y = 0; y < HEIGHT; y++)
+	{
+		for (x = 0; x < WIDTH; x++)
+		{
+			t = -1.0;
+			ray = generate_ray(scene.camera, vp, x, y);
+			t_list	*obj_node = scene.objects;
+			if (obj_node)
+			{
+				t_object	*obj = (t_object *)obj_node->content;
+				if (obj->type == OBJ_SPHERE)
+				{
+					t_sphere	sphere = obj->data.sphere;
+					t = intersect_sphere(ray, sphere);
+				}
+			}
+			if (t > 0)
+				color = 0xFF0000FF;
+			else
+				color = 0x000000FF;
+			mlx_put_pixel(img, x, y, color);
+		}
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -19,13 +55,16 @@ int	main(int argc, char **argv)
 	mlx_image_t	*img;
 
 	if (argc != 2)
-		error_exit("Error: Usage: ./miniRT <scene.rt>");
+		error_exit("Usage: ./miniRT <scene.rt>");
 	ft_memset(&scene, 0, sizeof(t_scene));
 	init_parser(argv[1], &scene);
-	mlx = mlx_init(800, 600, "miniRT", false);
+	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	if (!mlx)
 		return (1);
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (!img)
+		return (1);
+	render_scene(img, scene);
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

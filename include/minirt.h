@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:05:14 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/12 19:05:58 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:01:53 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "parser.h"
 # include "../libft/libft.h"
 # include "ray.h"
+# include "intersection.h"
 
 void	error_exit(char *msg);
 

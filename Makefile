@@ -10,6 +10,11 @@ SRCS = \
 	src/parser/parser.c \
 	src/parser/parser_objects.c \
 	src/parser/parser_utils.c \
+	src/intersection/sphere.c \
+	src/math/vector_ops.c \
+	src/math/vector_utils.c \
+	src/render/ray.c \
+	src/render/viewport.c \
 	utils/error_exit.c
 
 OBJDIR = obj
