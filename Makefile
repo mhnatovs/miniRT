@@ -15,7 +15,7 @@ SRCS = \
 	src/math/vector_utils.c \
 	src/render/ray.c \
 	src/render/viewport.c \
-	utils/error_exit.c
+	src/utils/error_exit.c
 
 OBJDIR = obj
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
