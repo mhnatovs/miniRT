@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:53:21 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/14 14:54:43 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:32:46 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,20 @@ typedef struct s_point
 	int		y;
 }			t_point;
 
+typedef struct s_hit
+{
+	float		t;
+	t_object	*obj;
+}				t_hit;
+
 t_ray		make_ray(t_vector origin, t_vector direction);
 t_ray		generate_ray(t_camera cam, t_viewport v, int x, int y);
-float		trace_ray(t_ray ray, t_scene scene);
+t_hit		trace_ray(t_ray ray, t_scene scene);
 t_viewport	init_viewport(t_camera cam);
 void		render_pixel(mlx_image_t *img,
 				t_scene scene, t_viewport vp, t_point p);
 void		render_scene(mlx_image_t *img, t_scene scene);
+uint32_t	color_to_int(t_color color);
+t_color		apply_ambient(t_color obj_color, t_ambient ambient);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:27:40 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/14 14:57:10 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:31:10 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,46 @@ float	intersect_object(t_ray ray, t_object *obj)
 	return (-1);
 }
 
-float	trace_ray(t_ray ray, t_scene scene)
+t_hit	trace_ray(t_ray ray, t_scene scene)
 {
-	float		closest;
+	t_hit		hit;
 	t_list		*node;
 	t_object	*obj;
 	float		t;
 
 	node = scene.objects;
-	closest = -1.0;
+	hit.t = -1.0;
+	hit.obj = NULL;
 	while (node)
 	{
 		obj = node->content;
 		t = intersect_object(ray, obj);
-		if (t > 0 && (closest < 0 || t < closest))
-			closest = t;
+		if (t > 0 && (hit.t < 0 || t < hit.t))
+		{
+			hit.t = t;
+			hit.obj = obj;
+		}
 		node = node->next;
 	}
-	return (closest);
+	return (hit);
 }
 
 void	render_pixel(mlx_image_t *img, t_scene scene, t_viewport vp, t_point p)
 {
 	t_ray		ray;
-	float		t;
+	t_hit		hit;
 	uint32_t	color;
+	t_color		lighted_color;
 
 	ray = generate_ray(scene.camera, vp, p.x, p.y);
-	t = trace_ray(ray, scene);
-	if (t > 0)
-		color = 0x000000FF;
+	hit = trace_ray(ray, scene);
+	if (hit.t > 0)
+	{
+		lighted_color = apply_ambient(hit.obj->color, scene.ambient);
+		color = color_to_int(lighted_color);
+	}
 	else
-		color = 0x00000000;
+		color = 0x000000FF;
 	mlx_put_pixel(img, p.x, p.y, color);
 }
 
