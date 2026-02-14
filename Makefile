@@ -16,6 +16,7 @@ SRCS = \
 	src/render/ray.c \
 	src/render/viewport.c \
 	src/render/scene.c \
+	src/render/color.c \
 	src/utils/error_exit.c
 
 OBJDIR = obj
