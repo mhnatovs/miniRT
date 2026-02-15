@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:13:57 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/13 15:52:18 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/15 11:00:55 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,13 @@ float	intersect_sphere(t_ray ray, t_sphere sphere)
 	if (t >= 0)
 		return (t);
 	return (-1.0);
+}
+
+t_vector	get_normal_sphere(t_vector hit_point, t_sphere sphere)
+{
+	t_vector	normal;
+
+	normal = vector_substract(hit_point, sphere.center);
+	normal = vector_normalize(normal);
+	return (normal);
 }

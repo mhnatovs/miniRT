@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 15:01:05 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/14 15:31:29 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/15 11:25:25 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,22 @@ t_color	apply_ambient(t_color obj_color, t_ambient ambient)
 	result.g = ambient.ratio * ambient.color.g * obj_color.g;
 	result.b = ambient.ratio * ambient.color.b * obj_color.b;
 	return (result);
+}
+
+t_color	apply_diffuse(t_hit hit, t_light light)
+{
+	t_color		diffuse;
+	t_vector	light_dir;
+	float		brightness;
+
+	light_dir = vector_substract(light.pos, hit.point);
+	light_dir = vector_normalize(light_dir);
+	brightness = vector_dot(hit.normal, light_dir);
+	if (brightness < 0)
+		brightness = 0;
+	brightness *= light.ratio;
+	diffuse.r = hit.obj->color.r * light.color.r * brightness;
+	diffuse.g = hit.obj->color.g * light.color.g * brightness;
+	diffuse.b = hit.obj->color.b * light.color.b * brightness;
+	return (diffuse);
 }
