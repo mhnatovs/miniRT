@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyan <jiyan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 21:18:42 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/15 21:02:39 by jiyan            ###   ########.fr       */
+/*   Updated: 2026/02/15 21:06:38 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		mlx_close_window(mlx);
 }
 
-static void resize_hook(int32_t width, int32_t height, void* param)
+static void	resize_hook(int32_t width, int32_t height, void *param)
 {
-    mlx_image_t* img = param;
-    mlx_resize_image(img, width, height);
+	mlx_image_t	*img;
+
+	img = param;
+	mlx_resize_image(img, width, height);
 }
 
 int	main(int argc, char **argv)
