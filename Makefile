@@ -64,7 +64,7 @@ $(LIBFT):
 $(MLX42_LIB):
 	@echo "$(Y)Configuring: $(B)MLX42$(NC) ..."
 	@cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build >/dev/null
-	@echo "$(Y)Building: $(B)MLX42$(NC)..."
+	@echo "$(Y)Building: $(B)MLX42$(NC) ..."
 	@cmake --build $(MLX42_DIR)/build >/dev/null
 
 # ================= CLEAN =================
