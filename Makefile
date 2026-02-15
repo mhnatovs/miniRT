@@ -52,6 +52,7 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX42_LIB)
 	@echo "$(G)[SUCCESS]$(NC) miniRT compiled!"
 
 $(OBJDIR)/%.o: %.c
+	@printf "\r\033[KCompiling: $(G)$(B)$<$(NC) ... \n"
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
