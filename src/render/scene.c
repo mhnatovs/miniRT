@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:27:40 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/14 18:31:10 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/15 11:23:09 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ t_hit	trace_ray(t_ray ray, t_scene scene)
 		{
 			hit.t = t;
 			hit.obj = obj;
+			hit.point = vector_add(ray.origin, vector_scale(ray.direction, t));
+			if (obj->type == OBJ_SPHERE)
+				hit.normal = get_normal_sphere(hit.point, obj->data.sphere);
 		}
 		node = node->next;
 	}
@@ -52,14 +55,20 @@ void	render_pixel(mlx_image_t *img, t_scene scene, t_viewport vp, t_point p)
 	t_ray		ray;
 	t_hit		hit;
 	uint32_t	color;
-	t_color		lighted_color;
+	t_color		ambient_col;
+	t_color		diffuse_col;
+	t_color		final_col;
 
 	ray = generate_ray(scene.camera, vp, p.x, p.y);
 	hit = trace_ray(ray, scene);
 	if (hit.t > 0)
 	{
-		lighted_color = apply_ambient(hit.obj->color, scene.ambient);
-		color = color_to_int(lighted_color);
+		ambient_col = apply_ambient(hit.obj->color, scene.ambient);
+		diffuse_col = apply_diffuse(hit, scene.light);
+		final_col.r = ambient_col.r + diffuse_col.r;
+		final_col.g = ambient_col.g + diffuse_col.g;
+		final_col.b = ambient_col.b + diffuse_col.b;
+		color = color_to_int(final_col);
 	}
 	else
 		color = 0x000000FF;

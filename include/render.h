@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:53:21 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/14 18:32:46 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/15 11:18:16 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_hit
 {
 	float		t;
 	t_object	*obj;
+	t_vector	point;
+	t_vector	normal;
 }				t_hit;
 
 t_ray		make_ray(t_vector origin, t_vector direction);
@@ -51,5 +53,7 @@ void		render_pixel(mlx_image_t *img,
 void		render_scene(mlx_image_t *img, t_scene scene);
 uint32_t	color_to_int(t_color color);
 t_color		apply_ambient(t_color obj_color, t_ambient ambient);
+t_color		apply_diffuse(t_hit hit, t_light light);
+t_vector	get_normal_sphere(t_vector hit_point, t_sphere sphere);
 
 #endif
