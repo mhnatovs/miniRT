@@ -49,10 +49,10 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX42_LIB)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
-	@echo "$(G)[SUCCESS]$(NC) miniRT compiled!"
+	@echo "$(G)[SUCCESS]$(NC) miniRT compiled!✨"
 
 $(OBJDIR)/%.o: %.c
-	@printf "\r\033[KCompiling: $(G)$(B)$<$(NC) ... \n"
+	@echo "$(Y)Compiling: $(G)$(B)$<$(NC) ..."
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
@@ -62,7 +62,9 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
 $(MLX42_LIB):
+	@echo "$(Y)Configuring: $(B)MLX42$(NC) ..."
 	@cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build >/dev/null
+	@echo "$(Y)Building: $(B)MLX42$(NC)..."
 	@cmake --build $(MLX42_DIR)/build >/dev/null
 
 # ================= CLEAN =================
@@ -81,6 +83,7 @@ clean:
 fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
 	@rm -f $(NAME)
+	@rm -rf $(MLX42_DIR)/build
 	@echo "$(R)[FCLEAN]$(NC) $(NAME) has been deleted!"
 
 re: fclean all
