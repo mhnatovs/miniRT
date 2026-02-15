@@ -11,6 +11,7 @@ SRCS = \
 	src/parser/parser_objects.c \
 	src/parser/parser_utils.c \
 	src/intersection/sphere.c \
+	src/intersection/plane.c \
 	src/math/vector_ops.c \
 	src/math/vector_utils.c \
 	src/render/ray.c \
