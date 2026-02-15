@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 14:36:01 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/15 14:37:46 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/15 15:14:01 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,9 @@ float	intersect_plane(t_ray ray, t_plane plane)
 	if (t < 0)
 		return (-1.0);
 	return (t);
+}
+
+t_vector	get_normal_plane(t_plane plane)
+{
+	return (plane.normal);
 }

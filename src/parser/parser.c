@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:04:33 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/10 13:57:35 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/15 15:07:24 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	parse_camera(char **tokens, t_scene *scene)
 		|| scene->camera.dir.y < -1.0 || scene->camera.dir.y > 1.0
 		|| scene->camera.dir.z < -1.0 || scene->camera.dir.z > 1.0)
 		error_exit("Error: Camera direction vector must be normalized");
+	scene->camera.dir = vector_normalize(scene->camera.dir);
 	scene->camera.fov = ft_atoi(tokens[3]);
 	if (scene->camera.fov < 0 || scene->camera.fov > 180)
 		error_exit("Error: Camera FOV must be in range [0, 180]");

@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:27:40 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/15 14:39:25 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/15 14:57:58 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_hit	trace_ray(t_ray ray, t_scene scene)
 			hit.point = vector_add(ray.origin, vector_scale(ray.direction, t));
 			if (obj->type == OBJ_SPHERE)
 				hit.normal = get_normal_sphere(hit.point, obj->data.sphere);
+			if (obj->type == OBJ_PLANE)
+				hit.normal = get_normal_plane(obj->data.plane);
 		}
 		node = node->next;
 	}

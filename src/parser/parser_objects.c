@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 13:34:09 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/10 13:59:32 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/15 15:13:34 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	parse_plane(char **tokens, t_scene *scene)
 		|| plane.normal.y > 1.0 || plane.normal.z < -1.0
 		|| plane.normal.z > 1.0)
 		error_exit("Error: Plane normal vector must be normalized");
+	plane.normal = vector_normalize(plane.normal);
 	plane.color = parse_color(tokens[3]);
 	object = malloc(sizeof(t_object));
 	if (!object)
@@ -56,6 +57,31 @@ void	parse_plane(char **tokens, t_scene *scene)
 	ft_lstadd_back(&scene->objects, ft_lstnew(object));
 }
 
+static void	validate_cylinder_params(t_cylinder cyl)
+{
+	if (cyl.dir.x < -1.0 || cyl.dir.x > 1.0 || cyl.dir.y < -1.0
+		|| cyl.dir.y > 1.0 || cyl.dir.z < -1.0 || cyl.dir.z > 1.0)
+		error_exit("Error: Cylinder axis vector must be normalized");
+	if (cyl.radius <= 0)
+		error_exit("Error: Cylinder diameter must be positive");
+	if (cyl.height <= 0)
+		error_exit("Error: Cylinder height must be positive");
+}
+
+static t_cylinder	create_cylinder(char **tokens)
+{
+	t_cylinder	cyl;
+
+	cyl.base = parse_vector(tokens[1]);
+	cyl.dir = parse_vector(tokens[2]);
+	cyl.dir = vector_normalize(cyl.dir);
+	cyl.radius = ft_atof(tokens[3]) / 2.0;
+	cyl.height = ft_atof(tokens[4]);
+	cyl.color = parse_color(tokens[5]);
+	validate_cylinder_params(cyl);
+	return (cyl);
+}
+
 void	parse_cylinder(char **tokens, t_scene *scene)
 {
 	t_cylinder	cyl;
@@ -64,18 +90,7 @@ void	parse_cylinder(char **tokens, t_scene *scene)
 	if (!tokens[1] || !tokens[2] || !tokens[3] || !tokens[4] || !tokens[5]
 		|| tokens[6])
 		error_exit("Error: Invalid Cylinder format");
-	cyl.base = parse_vector(tokens[1]);
-	cyl.dir = parse_vector(tokens[2]);
-	if (cyl.dir.x < -1.0 || cyl.dir.x > 1.0 || cyl.dir.y < -1.0
-		|| cyl.dir.y > 1.0 || cyl.dir.z < -1.0 || cyl.dir.z > 1.0)
-		error_exit("Error: Cylinder axis vector must be normalized");
-	cyl.radius = ft_atof(tokens[3]) / 2.0;
-	if (cyl.radius <= 0)
-		error_exit("Error: Cylinder diameter must be positive");
-	cyl.height = ft_atof(tokens[4]);
-	if (cyl.height <= 0)
-		error_exit("Error: Cylinder height must be positive");
-	cyl.color = parse_color(tokens[5]);
+	cyl = create_cylinder(tokens);
 	object = malloc(sizeof(t_object));
 	if (!object)
 		error_exit("Error: Memory allocation failed");
