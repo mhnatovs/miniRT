@@ -17,7 +17,8 @@ SRCS = \
 	src/render/viewport.c \
 	src/render/scene.c \
 	src/render/color.c \
-	src/utils/error_exit.c
+	src/utils/error_exit.c \
+	src/utils/cleanup.c
 
 OBJDIR = obj
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

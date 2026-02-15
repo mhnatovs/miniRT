@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 21:18:42 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/14 14:55:14 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/15 13:12:52 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,23 @@ int	main(int argc, char **argv)
 	init_parser(argv[1], &scene);
 	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	if (!mlx)
+	{
+		free_scene(&scene);
 		return (1);
-	mlx_key_hook(mlx, &key_hook, mlx);
+	}
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img)
+	{
+		mlx_terminate(mlx);
+		free_scene(&scene);
 		return (1);
+	}
+	mlx_key_hook(mlx, &key_hook, mlx);
 	render_scene(img, scene);
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop(mlx);
+	mlx_delete_image(mlx, img);
 	mlx_terminate(mlx);
+	free_scene(&scene);
 	return (0);
 }

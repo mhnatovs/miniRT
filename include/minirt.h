@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:05:14 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/14 14:56:46 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/15 13:09:42 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@
 # include "intersection.h"
 
 void	error_exit(char *msg);
+void	free_objects(t_list *objs);
+void	free_scene(t_scene *scene);
 
 #endif	
