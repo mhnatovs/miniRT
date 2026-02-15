@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 21:18:42 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/15 12:58:30 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/15 13:18:01 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 	render_scene(img, scene);
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop(mlx);
+	mlx_delete_image(mlx, img);
 	mlx_terminate(mlx);
 	ft_lstclear(&scene.objects, free);
 	return (0);
