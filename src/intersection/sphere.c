@@ -6,13 +6,12 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:13:57 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/15 11:00:55 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/16 13:26:40 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// vec_oc - origin center;
 // coef[0] = length of the ray direction (usually 1 if normalized)
 // coef[1] = how much the ray is pointing toward the sphere (oc · direction * 2)
 // coef[2] = distance from ray origin to sphere center minus radius squared

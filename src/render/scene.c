@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:27:40 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/15 14:57:58 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/16 17:57:50 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ float	intersect_object(t_ray ray, t_object *obj)
 		return (intersect_sphere(ray, obj->data.sphere));
 	if (obj->type == OBJ_PLANE)
 		return (intersect_plane(ray, obj->data.plane));
-	// if (obj->type == OBJ_CYLINDER)
-	// 	return (intersect_cylinder(ray, obj->data.cylinder));
+	if (obj->type == OBJ_CYLINDER)
+		return (intersect_cylinder(ray, obj->data.cylinder));
 	return (-1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:42:09 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/12 21:13:34 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:44:20 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,3 @@ t_vector	vector_normalize(t_vector a)
 	res.z = a.z / length;
 	return (res);
 }
-
-// t_vector	*new_vector(float x, float y, float z)
-// {
-// 	t_vector	*vec;
-
-// 	vec = malloc(sizeof(t_vector));
-// 	if (!vec)
-// 	{
-// 		error_exit(-1);
-// 		return (NULL);
-// 	}
-// 	vec->x = x;
-// 	vec->y = y;
-// 	vec->z = z;
-// 	return (vec);
-// }
