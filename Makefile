@@ -13,12 +13,14 @@ SRCS = \
 	src/intersection/sphere.c \
 	src/intersection/plane.c \
 	src/intersection/cylinder.c \
+	src/intersection/utils_intersection.c \
 	src/math/vector_ops.c \
 	src/math/vector_utils.c \
 	src/render/ray.c \
 	src/render/viewport.c \
 	src/render/scene.c \
 	src/render/color.c \
+	src/render/shadows.c \
 	src/utils/error_exit.c \
 	src/utils/cleanup.c
 

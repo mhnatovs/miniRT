@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:53:21 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/15 14:58:06 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/17 15:50:14 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void		render_scene(mlx_image_t *img, t_scene scene);
 uint32_t	color_to_int(t_color color);
 t_color		apply_ambient(t_color obj_color, t_ambient ambient);
 t_color		apply_diffuse(t_hit hit, t_light light);
-t_vector	get_normal_sphere(t_vector hit_point, t_sphere sphere);
-t_vector	get_normal_plane(t_plane plane);
+int			in_shadow(t_hit hit, t_scene scene);
 
 #endif

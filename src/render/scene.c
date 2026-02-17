@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:27:40 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/16 17:57:50 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/17 16:19:40 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_hit	trace_ray(t_ray ray, t_scene scene)
 				hit.normal = get_normal_sphere(hit.point, obj->data.sphere);
 			if (obj->type == OBJ_PLANE)
 				hit.normal = get_normal_plane(obj->data.plane);
+			if (obj->type == OBJ_CYLINDER)
+				hit.normal = get_normal_cylinder(hit.point, obj->data.cylinder);
 		}
 		node = node->next;
 	}
@@ -66,10 +68,17 @@ void	render_pixel(mlx_image_t *img, t_scene scene, t_viewport vp, t_point p)
 	if (hit.t > 0)
 	{
 		ambient_col = apply_ambient(hit.obj->color, scene.ambient);
-		diffuse_col = apply_diffuse(hit, scene.light);
-		final_col.r = ambient_col.r + diffuse_col.r;
-		final_col.g = ambient_col.g + diffuse_col.g;
-		final_col.b = ambient_col.b + diffuse_col.b;
+		if (in_shadow(hit, scene))
+		{
+			final_col = ambient_col;
+		}
+		else
+		{
+			diffuse_col = apply_diffuse(hit, scene.light);
+			final_col.r = ambient_col.r + diffuse_col.r;
+			final_col.g = ambient_col.g + diffuse_col.g;
+			final_col.b = ambient_col.b + diffuse_col.b;
+		}
 		color = color_to_int(final_col);
 	}
 	else
