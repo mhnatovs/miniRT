@@ -6,12 +6,16 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 14:36:01 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/15 15:14:01 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/18 17:22:47 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+// calculates ray intersection with plane and
+// returns t if the point is in front of the ray
+// 
+// fabs() returns absolute value of a double type
 float	intersect_plane(t_ray ray, t_plane plane)
 {
 	float		denominator;

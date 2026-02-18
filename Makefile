@@ -13,7 +13,7 @@ SRCS = \
 	src/intersection/sphere.c \
 	src/intersection/plane.c \
 	src/intersection/cylinder.c \
-	src/intersection/utils_intersection.c \
+	src/intersection/cylinder_utils.c \
 	src/math/vector_ops.c \
 	src/math/vector_utils.c \
 	src/render/ray.c \

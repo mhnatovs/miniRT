@@ -6,17 +6,17 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 16:13:15 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/12 21:18:39 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/18 17:34:18 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	make_ray(t_vector orig, t_vector dir)
+t_ray	make_ray(t_vector source, t_vector dir)
 {
 	t_ray	ray;
 
-	ray.origin = orig;
+	ray.origin = source;
 	ray.direction = vector_normalize(dir);
 	return (ray);
 }

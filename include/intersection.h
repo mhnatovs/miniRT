@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 15:01:15 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/17 13:31:17 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/18 16:22:25 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ float		intersect_cylinder(t_ray ray, t_cylinder c);
 t_vector	get_normal_sphere(t_vector hit_point, t_sphere sphere);
 t_vector	get_normal_plane(t_plane plane);
 t_vector	get_normal_cylinder(t_vector hit_point, t_cylinder c);
+t_vector	project_perpend_axis(t_vector v, t_vector axis);
 
 #endif

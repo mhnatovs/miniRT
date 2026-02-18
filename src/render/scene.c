@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:27:40 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/18 13:06:50 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/18 15:20:28 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ float	intersect_object(t_ray ray, t_object *obj)
 	return (-1);
 }
 
+// determines the normal at the intersection point
+// depending on the type of object
+static void	hit_normal(t_object *obj, t_hit *hit)
+{
+	if (obj->type == OBJ_SPHERE)
+		hit->normal = get_normal_sphere(hit->point, obj->data.sphere);
+	if (obj->type == OBJ_PLANE)
+		hit->normal = get_normal_plane(obj->data.plane);
+	if (obj->type == OBJ_CYLINDER)
+		hit->normal = get_normal_cylinder(hit->point, obj->data.cylinder);
+}
+
+// traces a ray across the scene and finds the nearest object it intersects with
 t_hit	trace_ray(t_ray ray, t_scene scene)
 {
 	t_hit		hit;
@@ -42,12 +55,7 @@ t_hit	trace_ray(t_ray ray, t_scene scene)
 			hit.t = t;
 			hit.obj = obj;
 			hit.point = vector_add(ray.origin, vector_scale(ray.direction, t));
-			if (obj->type == OBJ_SPHERE)
-				hit.normal = get_normal_sphere(hit.point, obj->data.sphere);
-			if (obj->type == OBJ_PLANE)
-				hit.normal = get_normal_plane(obj->data.plane);
-			if (obj->type == OBJ_CYLINDER)
-				hit.normal = get_normal_cylinder(hit.point, obj->data.cylinder);
+			hit_normal(obj, &hit);
 		}
 		node = node->next;
 	}
@@ -59,28 +67,11 @@ void	render_pixel(mlx_image_t *img, t_scene scene, t_viewport vp, t_point p)
 	t_ray		ray;
 	t_hit		hit;
 	uint32_t	color;
-	t_color		ambient_col;
-	t_color		diffuse_col;
-	t_color		final_col;
 
 	ray = generate_ray(scene.camera, vp, p.x, p.y);
 	hit = trace_ray(ray, scene);
 	if (hit.t > 0)
-	{
-		ambient_col = apply_ambient(hit.obj->color, scene.ambient);
-		if (in_shadow(hit, scene))
-		{
-			final_col = ambient_col;
-		}
-		else
-		{
-			diffuse_col = apply_diffuse(hit, scene.light);
-			final_col.r = ambient_col.r + diffuse_col.r;
-			final_col.g = ambient_col.g + diffuse_col.g;
-			final_col.b = ambient_col.b + diffuse_col.b;
-		}
-		color = color_to_int(final_col);
-	}
+		color = color_to_int(calc_color(hit, scene));
 	else
 		color = 0x000000FF;
 	mlx_put_pixel(img, p.x, p.y, color);
