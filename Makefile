@@ -92,6 +92,6 @@ fclean: clean
 re: fclean all
 
 v: $(NAME)
-	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/test.rt                        
+	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/shadows.rt                        
 
 .PHONY: all clean fclean re v
