@@ -14,16 +14,21 @@
 
 static void	parse_ambient(char **tokens, t_scene *scene)
 {
+	if (scene->has_ambient)
+		error_exit("Error: Ambient light can only be declared once");
 	if (!tokens[1] || !tokens[2] || tokens[3])
 		error_exit("Error: Invalid Ambient Light format");
 	scene->ambient.ratio = ft_atof(tokens[1]);
 	if (scene->ambient.ratio < 0.0 || scene->ambient.ratio > 1.0)
 		error_exit("Error: Ambient Light ratio must be in range [0.0, 1.0]");
 	scene->ambient.color = parse_color(tokens[2]);
+	scene->has_ambient = 1;
 }
 
 static void	parse_camera(char **tokens, t_scene *scene)
 {
+	if (scene->has_camera)
+		error_exit("Error: Camera can only be declared once");
 	if (!tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
 		error_exit("Error: Invalid Camera format");
 	scene->camera.pos = parse_vector(tokens[1]);
@@ -36,10 +41,13 @@ static void	parse_camera(char **tokens, t_scene *scene)
 	scene->camera.fov = ft_atoi(tokens[3]);
 	if (scene->camera.fov < 0 || scene->camera.fov > 180)
 		error_exit("Error: Camera FOV must be in range [0, 180]");
+	scene->has_camera = 1;
 }
 
 static void	parse_light(char **tokens, t_scene *scene)
 {
+	if (scene->has_light)
+		error_exit("Error: Light can only be declared once");
 	if (!tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
 		error_exit("Error: Invalid Light format");
 	scene->light.pos = parse_vector(tokens[1]);
@@ -47,6 +55,7 @@ static void	parse_light(char **tokens, t_scene *scene)
 	if (scene->light.ratio < 0.0 || scene->light.ratio > 1.0)
 		error_exit("Error: Light ratio must be in range [0.0, 1.0]");
 	scene->light.color = parse_color(tokens[3]);
+	scene->has_light = 1;
 }
 
 static void	parse_line(char *line, t_scene *scene)

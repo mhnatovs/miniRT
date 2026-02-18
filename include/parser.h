@@ -49,6 +49,9 @@ typedef struct s_scene
 	t_camera		camera;
 	t_light			light;
 	t_list			*objects;
+	int				has_ambient;
+	int				has_camera;
+	int				has_light;
 }					t_scene;
 
 typedef struct s_sphere
