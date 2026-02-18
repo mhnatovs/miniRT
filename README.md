@@ -24,7 +24,7 @@ This will build the `MLX42` library and the `miniRT` executable.
 ### Execution
 To run the Raytracer with a scene description file:
 ```bash
-./miniRT scene/scene.rt
+./miniRT scenes/scene.rt
 ```
 - **Controls**: Press `ESC` to close the window and exit the program.
 
