@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/19 14:00:00 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/19 15:41:05 by jiyawang         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -43,4 +32,24 @@ void	mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods,
 			ft_putstr_fd("Selection cleared\n", 1);
 		}
 	}
+}
+
+void	scroll_hook(double xdelta, double ydelta, void *param)
+{
+	t_context		*ctx;
+	mlx_key_data_t	fake_key;
+
+	(void)xdelta;
+	ctx = (t_context *)param;
+	if (!ctx->selected_obj)
+		return ;
+	ft_memset(&fake_key, 0, sizeof(mlx_key_data_t));
+	fake_key.action = MLX_PRESS;
+	if (ydelta > 0)
+		fake_key.key = MLX_KEY_UP;
+	else if (ydelta < 0)
+		fake_key.key = MLX_KEY_DOWN;
+	else
+		return ;
+	modify_object(ctx, fake_key);
 }

@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/10 12:05:14 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/19 16:00:54 by jiyawang         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -43,8 +32,11 @@ typedef struct s_context
 }				t_context;
 
 void			error_exit(char *msg);
+void			re_render(t_context *ctx);
+void			modify_object(t_context *ctx, mlx_key_data_t keydata);
 void			key_hook(mlx_key_data_t keydata, void *param);
 void			mouse_hook(mouse_key_t button, action_t action,
 					modifier_key_t mods, void *param);
+void			scroll_hook(double xdelta, double ydelta, void *param);
 
 #endif

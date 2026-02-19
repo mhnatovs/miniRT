@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/12 21:18:42 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/19 16:02:11 by jiyawang         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -39,6 +28,7 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(ctx.mlx, ctx.img, 0, 0);
 	mlx_key_hook(ctx.mlx, &key_hook, &ctx);
 	mlx_mouse_hook(ctx.mlx, &mouse_hook, &ctx);
+	mlx_scroll_hook(ctx.mlx, &scroll_hook, &ctx);
 	mlx_resize_hook(ctx.mlx, &resize_hook, &ctx);
 	mlx_loop(ctx.mlx);
 	mlx_delete_image(ctx.mlx, ctx.img);
