@@ -21,6 +21,8 @@ SRCS = \
 	src/render/scene.c \
 	src/render/color.c \
 	src/render/shadows.c \
+	src/hooks/mouse.c \
+	src/hooks/key.c \
 	src/utils/error_exit.c \
 
 OBJDIR = obj
@@ -91,6 +93,6 @@ fclean: clean
 re: fclean all
 
 v: $(NAME)
-	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/shadows.rt                        
+	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/scene2.rt                        
 
 .PHONY: all clean fclean re v
