@@ -26,7 +26,8 @@ To run the Raytracer with a scene description file:
 ```bash
 ./miniRT scenes/scene.rt
 ```
-- **Controls**: Press `ESC` to close the window and exit the program.
+- **Controls**:
+- Press `ESC` to close the window and exit the program.
 - W/S - move forward/backward
 - A/D - move left/right
 - Q/E - up/down
