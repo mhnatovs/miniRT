@@ -27,12 +27,12 @@ To run the Raytracer with a scene description file:
 ./miniRT scenes/scene.rt
 ```
 - **Controls**: Press `ESC` to close the window and exit the program.
-W/S - move forward/backward
-A/D - move left/right
-Q/E - up/down
-Arrow keys - rotate camera (when nothing is selected)
-Left click on object - select
-Arrow keys - change size (when selected)
+- W/S - move forward/backward
+- A/D - move left/right
+- Q/E - up/down
+- Arrow keys - rotate camera (when nothing is selected)
+- Left click on object - select
+- Arrow keys - change size (when selected)
 
 ### Scene Format
 The project uses `.rt` files to define scenes. Each line represents a scene element:
