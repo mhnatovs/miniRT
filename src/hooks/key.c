@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:11:09 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/20 15:37:42 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/20 16:31:47 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,39 @@ void	re_render(t_context *ctx)
 	render_scene(ctx->img, ctx->scene);
 }
 
-void	modify_object(t_context *ctx, mlx_key_data_t keydata)
+static void	update_object_params(t_object *o, int key, float d)
 {
-	if (!ctx->selected_obj)
+	if (key == MLX_KEY_UP || key == MLX_KEY_DOWN)
+	{
+		if (o->type == OBJ_SPHERE)
+			o->data.sphere.radius += d;
+		else if (o->type == OBJ_CYLINDER)
+			o->data.cylinder.height += d;
+	}
+	else if ((key == MLX_KEY_RIGHT || key == MLX_KEY_LEFT)
+		&& o->type == OBJ_CYLINDER)
+		o->data.cylinder.radius += d;
+	if (o->type == OBJ_SPHERE && o->data.sphere.radius < 0.1f)
+		o->data.sphere.radius = 0.1f;
+	if (o->type == OBJ_CYLINDER && o->data.cylinder.height < 0.1f)
+		o->data.cylinder.height = 0.1f;
+	if (o->type == OBJ_CYLINDER && o->data.cylinder.radius < 0.1f)
+		o->data.cylinder.radius = 0.1f;
+}
+
+void	modify_object(t_context *ctx, mlx_key_data_t key)
+{
+	t_object	*o;
+	float		d;
+
+	o = ctx->selected_obj;
+	if (!o || (key.action != MLX_PRESS && key.action != MLX_REPEAT))
 		return ;
-	if (keydata.key == MLX_KEY_UP && (keydata.action == MLX_PRESS
-			|| keydata.action == MLX_REPEAT))
-	{
-		if (ctx->selected_obj->type == OBJ_SPHERE)
-			ctx->selected_obj->data.sphere.radius += 0.5;
-		else if (ctx->selected_obj->type == OBJ_CYLINDER)
-			ctx->selected_obj->data.cylinder.height += 0.5;
-		re_render(ctx);
-	}
-	else if (keydata.key == MLX_KEY_DOWN && (keydata.action == MLX_PRESS
-			|| keydata.action == MLX_REPEAT))
-	{
-		if (ctx->selected_obj->type == OBJ_SPHERE)
-			ctx->selected_obj->data.sphere.radius -= 0.5;
-		else if (ctx->selected_obj->type == OBJ_CYLINDER)
-			ctx->selected_obj->data.cylinder.height -= 0.5;
-		if (ctx->selected_obj->type == OBJ_SPHERE
-			&& ctx->selected_obj->data.sphere.radius < 0.1)
-			ctx->selected_obj->data.sphere.radius = 0.1;
-		else if (ctx->selected_obj->type == OBJ_CYLINDER
-			&& ctx->selected_obj->data.cylinder.radius < 0.1)
-			ctx->selected_obj->data.cylinder.height = 0.1;
-		re_render(ctx);
-	}
-	if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS
-			|| keydata.action == MLX_REPEAT))
-	{
-		if (ctx->selected_obj->type == OBJ_CYLINDER)
-		{
-			ctx->selected_obj->data.cylinder.radius += 0.5;
-			re_render(ctx);
-		}
-	}
-	else if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS
-			|| keydata.action == MLX_REPEAT))
-	{
-		if (ctx->selected_obj->type == OBJ_CYLINDER)
-		{
-			ctx->selected_obj->data.cylinder.radius -= 0.5;
-			if (ctx->selected_obj->data.cylinder.radius < 0.1)
-				ctx->selected_obj->data.cylinder.radius = 0.1;
-			re_render(ctx);
-		}
-	}
+	d = -0.5f;
+	if (key.key == MLX_KEY_UP || key.key == MLX_KEY_RIGHT)
+		d = 0.5f;
+	update_object_params(o, key.key, d);
+	re_render(ctx);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
