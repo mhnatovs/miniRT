@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:11:09 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/20 09:15:06 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:37:42 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	ctx = (t_context *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(ctx->mlx);
+	move_camera(ctx, keydata);
+	rotate_camera(ctx, keydata);
 	modify_object(ctx, keydata);
 }
