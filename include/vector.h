@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 14:44:32 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/16 15:44:44 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:26:08 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ typedef struct s_vector
 	float	z;
 }			t_vector;
 
-// Utils
 float		vector_length(t_vector a);
 t_vector	vector_normalize(t_vector a);
-
-// Operations
 t_vector	vector_add(t_vector a, t_vector b);
 t_vector	vector_substract(t_vector a, t_vector b);
 t_vector	vector_scale(t_vector v, float k);

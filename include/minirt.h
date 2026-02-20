@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 09:10:48 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/20 09:10:51 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:57:35 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void			key_hook(mlx_key_data_t keydata, void *param);
 void			mouse_hook(mouse_key_t button, action_t action,
 					modifier_key_t mods, void *param);
 void			scroll_hook(double xdelta, double ydelta, void *param);
+// void			move_camera(t_context *ctx, mlx_key_data_t k_data);
 
 #endif
