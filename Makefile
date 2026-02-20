@@ -23,8 +23,9 @@ SRCS = \
 	src/render/shadows.c \
 	src/hooks/mouse.c \
 	src/hooks/key.c \
-	src/utils/error_exit.c \
 	src/hooks/move_camera.c \
+	src/hooks/rotate_camera.c \
+	src/utils/error_exit.c
 
 OBJDIR = obj
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:34:17 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/20 16:30:10 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/20 17:34:43 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,43 +64,4 @@ void	move_camera(t_context *cont, mlx_key_data_t key)
 	else if (key.key == MLX_KEY_E && (key.action == MLX_PRESS
 			|| key.action == MLX_REPEAT))
 		vertical_movement(cont, -speed);
-}
-
-void	rotate_camera(t_context *cont, mlx_key_data_t key)
-{
-	float		angle;
-	t_vector	new_dir;
-	float		cos_a;
-	float		sin_a;
-
-	if (cont->selected_obj)
-		return ;
-	angle = 0.5;
-	if (key.key == MLX_KEY_Z && (key.action == MLX_PRESS
-			|| key.action == MLX_REPEAT))
-	{
-		cos_a = cos(angle);
-		sin_a = sin(angle);
-		new_dir.x = cont->scene.camera.dir.x * cos_a
-			+ cont->scene.camera.dir.z * sin_a;
-		new_dir.y = cont->scene.camera.dir.y;
-		new_dir.z = -cont->scene.camera.dir.x * sin_a
-			+ cont->scene.camera.dir.z * cos_a;
-		cont->scene.camera.dir = vector_normalize(new_dir);
-		re_render(cont);
-	}
-	else if (key.key == MLX_KEY_X && (key.action == MLX_PRESS
-			|| key.action == MLX_REPEAT))
-	{
-		angle = -angle;
-		cos_a = cos(angle);
-		sin_a = sin(angle);
-		new_dir.x = cont->scene.camera.dir.x * cos_a
-			+ cont->scene.camera.dir.z * sin_a;
-		new_dir.y = cont->scene.camera.dir.y;
-		new_dir.z = -cont->scene.camera.dir.x * sin_a
-			+ cont->scene.camera.dir.z * cos_a;
-		cont->scene.camera.dir = vector_normalize(new_dir);
-		re_render(cont);
-	}
 }
