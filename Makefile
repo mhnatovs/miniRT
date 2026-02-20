@@ -25,6 +25,8 @@ SRCS = \
 	src/hooks/key.c \
 	src/utils/error_exit.c \
 	src/hooks/move_camera.c \
+	src/hooks/move_object.c \
+
 
 OBJDIR = obj
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

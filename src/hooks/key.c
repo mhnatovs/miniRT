@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   key.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 09:11:09 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/20 16:31:47 by mhnatovs         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -48,6 +37,9 @@ void	modify_object(t_context *ctx, mlx_key_data_t key)
 	d = -0.5f;
 	if (key.key == MLX_KEY_UP || key.key == MLX_KEY_RIGHT)
 		d = 0.5f;
+	if (key.key != MLX_KEY_UP && key.key != MLX_KEY_DOWN
+		&& key.key != MLX_KEY_LEFT && key.key != MLX_KEY_RIGHT)
+		return ;
 	update_object_params(o, key.key, d);
 	re_render(ctx);
 }
@@ -63,3 +55,4 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	rotate_camera(ctx, keydata);
 	modify_object(ctx, keydata);
 }
+
