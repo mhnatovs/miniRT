@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 14:53:21 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/19 16:01:08 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/20 10:09:09 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_ray			make_ray(t_vector source, t_vector direction);
 t_ray			generate_ray(t_camera cam, t_viewport v, int x, int y);
 t_hit			trace_ray(t_ray ray, t_scene scene);
 t_viewport		init_viewport(t_camera cam);
-void	render_pixel(mlx_image_t *img,
+void			render_pixel(mlx_image_t *img,
 					t_scene scene,
 					t_viewport vp,
 					t_point p);
