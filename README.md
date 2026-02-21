@@ -3,93 +3,60 @@
 # miniRT
 
 ## Description
-miniRT is a simple Raytracer developed in C. The goal of the project is to implement the fundamentals of ray tracing to render 3D scenes. It supports the rendering of basic geometric primitives (spheres, planes, and cylinders) with ambient and point light sources. The program handles camera positioning and orientation, providing a windowed display of the rendered scene using the MLX42 library.
+miniRT is a basic Raytracer implementation written in C. The goal of this project is to generate computer-generated images using the Ray Tracing technique. It simulates the physics of light to render 3D scenes containing basic geometric shapes (Spheres, Planes, and Cylinders) with realistic lighting and shadows.
+
+This project utilizes the **MLX42** library for window management and pixel manipulation.
+
+**Key Features:**
+-   **Shapes:** Sphere, Plane, Cylinder.
+-   **Lighting:** Ambient and diffuse lighting implementation.
+-   **Shadows:** Hard shadows casting.
+-   **Interactive Camera:** Move and rotate the view inside the scene using WASD and mouse.
+-   **Object Manipulation:** Select objects with the mouse to move or scale them interactively.
+-   **Scene Parsing:** Reads scene configuration from `.rt` files.
 
 ## Instructions
 
-### Prerequisites
-- Linux/macOS
-- `cc` compiler
-- `cmake` (required for MLX42)
-- `glfw` (dependency for MLX42)
-- `make`
-
 ### Compilation
-To compile the project, run the following command in the root of the repository:
+To compile the project, simply run `make` in the root directory:
 ```bash
 make
 ```
-This will build the `MLX42` library and the `miniRT` executable.
 
 ### Execution
-To run the Raytracer with a scene description file:
+Run the program by providing a path to a scene file (`.rt`):
 ```bash
 ./miniRT scenes/scene.rt
 ```
-- **Controls**:
-- Press `ESC` to close the window and exit the program.
-- W/S - move forward/backward
-- A/D - move left/right
-- Q/E - up/down
-- Arrow keys - rotate camera (when nothing is selected)
-- Left click on object - select
-- Arrow keys - change size (when selected)
 
-### Scene Format
-The project uses `.rt` files to define scenes. Each line represents a scene element:
-- `A`: Ambient lighting (ratio, RGB)
-- `C`: Camera (position, direction, FOV)
-- `L`: Light source (position, brightness, RGB)
-- `sp`: Sphere (center, diameter, RGB)
-- `pl`: Plane (point, normal, RGB)
-- `cy`: Cylinder (center, axis, diameter, height, RGB)
-
-Example `.rt` file:
-```
-A 0.2 255,255,255
-C -50,0,20 1,0,0 70
-L -40,0,30 0.7 255,255,255
-pl 0,0,0 0,1,0 255,0,225
-sp 0,0,20 20 255,0,0
-cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255
-```
+### Controls
+-   **Camera Movement:**
+    -   `W`, `A`, `S`, `D`: Move camera position.
+    -   `Arrow Keys`: Rotate camera view.
+    -   `Q` / `E`: Move Up / Down.
+-   **Object Interaction:**
+    -   **Left Click:** Select an object.
+    -   **Drag (Left Click):** Move the selected object.
+    -   **Scroll Wheel:**
+        -   If no object is selected: Adjust Camera FOV (Zoom).
+        -   If an object is selected: Scale the object (Radius/Height).
+    -   **Right Click:** Deselect object / Stop dragging.
+-   **General:**
+    -   `ESC`: Exit the program.
 
 ## Resources
-- [Scratchapixel](https://www.scratchapixel.com/): Comprehensive guides on computer graphics and ray tracing.
-- [Ray Tracing in One Weekend](https://raytracing.github.io/): A popular tutorial series for building a ray tracer from scratch.
 
-### Mathematical Background
-- Linear algebra: vectors, dot product, cross product
-- Analytic geometry: ray-sphere, ray-plane, ray-cylinder intersection
-- Lighting models: ambient, diffuse (Lambertian)
+### References
+-   [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) - The standard guide for understanding ray tracing concepts.
+-   [MLX42 Documentation](https://github.com/codam-coding-college/MLX42) - Documentation for the graphical library used.
+-   [Scratchapixel](https://www.scratchapixel.com/) - Great resources for computer graphics math.
+-   [42 miniRT Subject](https://cdn.intra.42.fr/pdf/pdf/145453/en.subject.pdf) - Project requirements.
 
 ### AI Usage
+AI assistants (GitHub Copilot) were used in this project to enhance development efficiency and code quality. Specifically:
 
-AI was used during development for:
-
-**Learning support:**
-- Explaining mathematical concepts (quadratic equation for ray-sphere intersection, vector projections)
-- Breaking down complex algorithms into understandable steps
-- Providing visual analogies and examples
-
-**Debugging assistance:**
-- Identifying logic errors in intersection calculations
-- Reviewing code structure
-
-**Code review:**
-- Suggesting better variable names for clarity
-
-**What we did NOT use AI for:**
-- Writing complete functions (we wrote all code ourselves)
-- Copy-pasting solutions without understanding
-- Bypassing the learning process
-
-All mathematical formulas were derived step-by-step with explanations.
-Every function was written by hand after understanding the underlying logic.
-The project represents genuine learning and comprehension of ray tracing principles.
-
-## Team
-
-- **mhnatovs** - Ray tracing engine, mathematics, lighting
-- **jiyawang** - Parser, MLX integration, memory management
-```
+-   **Code Optimization:** AI suggested compiler flags (`-O3`, `-ffast-math`) and architectural changes in the ray tracing loop (deferring normal calculation) to significantly improve rendering performance.
+-   **Debugging:** AI assisted in analyzing Valgrind reports to differentiate between project-specific memory leaks and external library (MLX42/GLFW) allocations.
+-   **Refactoring:** AI helped split large functions and files (e.g., `move_object.c`, `if_colliding.c`) to comply with the 42 "Norminette" coding standard (max 25 lines per function, max 5 functions per file).
+-   **Boilerplate:** AI generated standard boilerplate code for headers and Makefiles.
+-   **Learning:** Explaining complex mathematical concepts like vector projections and intersection formulas.

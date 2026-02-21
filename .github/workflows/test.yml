@@ -1,0 +1,28 @@
+name: miniRT_CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true # 重要：如果你的 MLX42 是子模块，必须加这一行
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          # 增加了 cmake, ninja, 以及 MLX42 需要的各种开发库
+          sudo apt-get install -y gcc make cmake build-essential libxext-dev libx11-dev libbsd-dev libglfw3-dev libgles2-mesa-dev ninja-build
+
+      - name: Compile with Make
+        run: make
+
+      - name: Check Executable
+        run: ls -l miniRT
