@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/21 10:56:05 by jiyawang          #+#    #+#             */
+/*   Updated: 2026/02/21 10:56:07 by jiyawang         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -34,13 +45,15 @@ void	modify_object(t_context *ctx, mlx_key_data_t key)
 	o = ctx->selected_obj;
 	if (!o || (key.action != MLX_PRESS && key.action != MLX_REPEAT))
 		return ;
-	d = -0.5f;
+	d = -0.1f;
 	if (key.key == MLX_KEY_UP || key.key == MLX_KEY_RIGHT)
-		d = 0.5f;
+		d = 0.1f;
 	if (key.key != MLX_KEY_UP && key.key != MLX_KEY_DOWN
 		&& key.key != MLX_KEY_LEFT && key.key != MLX_KEY_RIGHT)
 		return ;
 	update_object_params(o, key.key, d);
+	update_pos(o, vector_substract(ctx->intended_pos, get_obj_pos(o)));
+	resolve_scaling_collision(ctx, o);
 	re_render(ctx);
 }
 
@@ -55,4 +68,3 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	rotate_camera(ctx, keydata);
 	modify_object(ctx, keydata);
 }
-

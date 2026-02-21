@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyan <jiyan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:05:00 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/10 13:58:03 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/21 08:49:59 by jiyan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_plane
 	t_vector		point;
 	t_vector		normal;
 	t_color			color;
+	float			opacity;
 }					t_plane;
 
 typedef struct s_cylinder

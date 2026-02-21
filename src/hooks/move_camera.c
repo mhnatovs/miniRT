@@ -32,7 +32,7 @@ static void	vertical_movement(t_context *cont, float speed)
 
 void	move_camera(t_context *cont, mlx_key_data_t key)
 {
-	float		speed;
+	float	speed;
 
 	speed = 2.0;
 	if (key.key == MLX_KEY_W && (key.action == MLX_PRESS
@@ -63,17 +63,16 @@ void	rotate_camera(t_context *cont, mlx_key_data_t key)
 	float		sin_a;
 
 	angle = 0.5;
-
 	if (key.key == MLX_KEY_Z && (key.action == MLX_PRESS
 			|| key.action == MLX_REPEAT))
 	{
 		cos_a = cos(angle);
 		sin_a = sin(angle);
-		new_dir.x = cont->scene.camera.dir.x * cos_a
-			+ cont->scene.camera.dir.z * sin_a;
+		new_dir.x = cont->scene.camera.dir.x * cos_a + cont->scene.camera.dir.z
+			* sin_a;
 		new_dir.y = cont->scene.camera.dir.y;
-		new_dir.z = -cont->scene.camera.dir.x * sin_a
-			+ cont->scene.camera.dir.z * cos_a;
+		new_dir.z = -cont->scene.camera.dir.x * sin_a + cont->scene.camera.dir.z
+			* cos_a;
 		cont->scene.camera.dir = vector_normalize(new_dir);
 		re_render(cont);
 	}
@@ -83,11 +82,11 @@ void	rotate_camera(t_context *cont, mlx_key_data_t key)
 		angle = -angle;
 		cos_a = cos(angle);
 		sin_a = sin(angle);
-		new_dir.x = cont->scene.camera.dir.x * cos_a
-			+ cont->scene.camera.dir.z * sin_a;
+		new_dir.x = cont->scene.camera.dir.x * cos_a + cont->scene.camera.dir.z
+			* sin_a;
 		new_dir.y = cont->scene.camera.dir.y;
-		new_dir.z = -cont->scene.camera.dir.x * sin_a
-			+ cont->scene.camera.dir.z * cos_a;
+		new_dir.z = -cont->scene.camera.dir.x * sin_a + cont->scene.camera.dir.z
+			* cos_a;
 		cont->scene.camera.dir = vector_normalize(new_dir);
 		re_render(cont);
 	}

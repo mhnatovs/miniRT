@@ -2,8 +2,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 400
-# define HEIGHT 200
+# define WIDTH 800
+# define HEIGHT 600
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -31,6 +31,7 @@ typedef struct s_context
 	t_object	*selected_obj;
 	double		prev_mouse[2];
 	bool		is_dragging;
+	t_vector	intended_pos;
 }				t_context;
 
 void			error_exit(char *msg);
@@ -44,5 +45,10 @@ void			cursor_hook(double xpos, double ypos, void *param);
 void			move_camera(t_context *cont, mlx_key_data_t key);
 void			rotate_camera(t_context *cont, mlx_key_data_t key);
 void			move_object_drag(t_context *ctx, double dx, double dy);
+bool			is_colliding(t_context *ctx, t_object *o, t_vector next_pos);
+t_vector		get_obj_pos(t_object *o);
+void			update_pos(t_object *o, t_vector move);
+void			resolve_scaling_collision(t_context *ctx, t_object *o);
+t_hit			trace_ray_selection(t_ray ray, t_scene scene);
 
 #endif

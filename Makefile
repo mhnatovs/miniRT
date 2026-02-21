@@ -1,7 +1,7 @@
 NAME = miniRT
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3 -ffast-math -flto
 
 # ================= FILES =================
 
@@ -21,8 +21,12 @@ SRCS = \
 	src/render/scene.c \
 	src/render/color.c \
 	src/render/shadows.c \
-	src/hooks/mouse.c \
 	src/hooks/key.c \
+	src/hooks/mouse.c \
+	src/hooks/mouse_scroll.c \
+	src/hooks/object_position.c \
+	src/hooks/if_colliding.c \
+	src/hooks/resolve_collision.c \
 	src/utils/error_exit.c \
 	src/hooks/move_camera.c \
 	src/hooks/move_object.c \
