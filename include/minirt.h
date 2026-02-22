@@ -56,6 +56,8 @@ void			cursor_hook(double xpos, double ypos, void *param);
 void			move_camera(t_context *cont, mlx_key_data_t key);
 void			rotate_camera(t_context *cont, mlx_key_data_t key);
 void			move_object_drag(t_context *ctx, double dx, double dy);
+void			move_light(t_context *ctx, mlx_key_data_t key);
+void			rotate_object(t_context *ctx, mlx_key_data_t key);
 bool			is_colliding(t_context *ctx, t_object *o, t_vector next_pos);
 t_vector		get_obj_pos(t_object *o);
 void			update_pos(t_object *o, t_vector move);
