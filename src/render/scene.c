@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/14 14:27:40 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/18 15:20:28 by mhnatovs         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -25,7 +14,7 @@ float	intersect_object(t_ray ray, t_object *obj)
 
 // determines the normal at the intersection point
 // depending on the type of object
-static void	hit_normal(t_object *obj, t_hit *hit)
+void	hit_normal(t_object *obj, t_hit *hit)
 {
 	if (obj->type == OBJ_SPHERE)
 		hit->normal = get_normal_sphere(hit->point, obj->data.sphere);
@@ -54,10 +43,13 @@ t_hit	trace_ray(t_ray ray, t_scene scene)
 		{
 			hit.t = t;
 			hit.obj = obj;
-			hit.point = vector_add(ray.origin, vector_scale(ray.direction, t));
-			hit_normal(obj, &hit);
 		}
 		node = node->next;
+	}
+	if (hit.obj)
+	{
+		hit.point = vector_add(ray.origin, vector_scale(ray.direction, hit.t));
+		hit_normal(hit.obj, &hit);
 	}
 	return (hit);
 }

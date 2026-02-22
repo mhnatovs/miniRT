@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 09:11:31 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/20 09:11:34 by jiyawang         ###   ########.fr       */
+/*   Created: 2026/02/21 10:53:41 by jiyawang          #+#    #+#             */
+/*   Updated: 2026/02/21 12:03:47 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(ctx.mlx, ctx.img, 0, 0);
 	mlx_key_hook(ctx.mlx, &key_hook, &ctx);
 	mlx_mouse_hook(ctx.mlx, &mouse_hook, &ctx);
+	mlx_cursor_hook(ctx.mlx, &cursor_hook, &ctx);
 	mlx_scroll_hook(ctx.mlx, &scroll_hook, &ctx);
 	mlx_resize_hook(ctx.mlx, &resize_hook, &ctx);
 	mlx_loop(ctx.mlx);

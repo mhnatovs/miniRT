@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:34:17 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/20 17:34:43 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/22 13:20:15 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	vertical_movement(t_context *cont, float speed)
 
 void	move_camera(t_context *cont, mlx_key_data_t key)
 {
-	float		speed;
+	float	speed;
 
 	speed = 2.0;
 	if (key.key == MLX_KEY_W && (key.action == MLX_PRESS

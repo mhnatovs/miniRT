@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/10 12:05:00 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/10 13:58:03 by jiyawang         ###   ########.fr       */
+/*   Created: 2026/02/21 11:58:20 by jiyawang          #+#    #+#             */
+/*   Updated: 2026/02/21 11:58:23 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_plane
 	t_vector		point;
 	t_vector		normal;
 	t_color			color;
+	float			opacity;
 }					t_plane;
 
 typedef struct s_cylinder
