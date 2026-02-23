@@ -67,4 +67,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	move_camera(ctx, keydata);
 	rotate_camera(ctx, keydata);
 	modify_object(ctx, keydata);
+	rotate_object(ctx, keydata);
+	move_light(ctx, keydata);
 }

@@ -14,12 +14,14 @@
 
 void	error_exit(char *msg)
 {
+	if (write(STDERR_FILENO, "Error\n", 6) == -1)
+		(void)0;
 	if (msg)
 	{
 		if (write(STDERR_FILENO, msg, ft_strlen(msg)) == -1)
 			(void)0;
+		if (write(STDERR_FILENO, "\n", 1) == -1)
+			(void)0;
 	}
-	if (write(STDERR_FILENO, "\n", 1) == -1)
-		(void)0;
 	exit(1);
 }
