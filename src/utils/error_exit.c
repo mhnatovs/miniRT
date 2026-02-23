@@ -6,20 +6,31 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 21:19:29 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/21 11:33:05 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/23 10:03:48 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+// void	error_exit(char *msg)
+// {
+// 	if (write(STDERR_FILENO, "Error\n", 6) == -1)
+// 		(void)0;
+// 	if (msg)
+// 	{
+// 		if (write(STDERR_FILENO, msg, ft_strlen(msg)) == -1)
+// 			(void)0;
+// 	}
+// 	if (write(STDERR_FILENO, "\n", 1) == -1)
+// 		(void)0;
+// 	exit(1);
+// }
+
 void	error_exit(char *msg)
 {
+	write(STDERR_FILENO, "Error\n", 6);
 	if (msg)
-	{
-		if (write(STDERR_FILENO, msg, ft_strlen(msg)) == -1)
-			(void)0;
-	}
-	if (write(STDERR_FILENO, "\n", 1) == -1)
-		(void)0;
+		write(STDERR_FILENO, msg, ft_strlen(msg));
+	write(STDERR_FILENO, "\n", 1);
 	exit(1);
 }

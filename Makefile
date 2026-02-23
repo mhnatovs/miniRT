@@ -1,7 +1,8 @@
 NAME = miniRT
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -ffast-math -flto
+CFLAGS = -Wall -Wextra -Werror -O3
+# -ffast-math -flto
 
 # ================= FILES =================
 
