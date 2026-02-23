@@ -59,9 +59,6 @@ void	parse_plane(char **tokens, t_scene *scene)
 
 static void	validate_cylinder_params(t_cylinder cyl)
 {
-	if (cyl.dir.x < -1.0 || cyl.dir.x > 1.0 || cyl.dir.y < -1.0
-		|| cyl.dir.y > 1.0 || cyl.dir.z < -1.0 || cyl.dir.z > 1.0)
-		error_exit("Cylinder axis vector must be normalized");
 	if (cyl.radius <= 0)
 		error_exit("Cylinder diameter must be positive");
 	if (cyl.height <= 0)
