@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:04:43 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/23 09:29:47 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:52:55 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ t_color	parse_color(char *str)
 
 	rgb = ft_split(str, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		error_exit("Invalid color format (R,G,B)");
+		error_exit("Invalid color format (R,G,B).\n");
 	color.r = ft_atoi(rgb[0]);
 	color.g = ft_atoi(rgb[1]);
 	color.b = ft_atoi(rgb[2]);
 	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255
 		|| color.b < 0 || color.b > 255)
-		error_exit("Color values must be in range [0, 255]");
+		error_exit("Color values must be in range [0, 255].\n");
 	color.r = color.r / 255.0;
 	color.g = color.g / 255.0;
 	color.b = color.b / 255.0;
@@ -83,7 +83,7 @@ t_vector	parse_vector(char *str)
 
 	xyz = ft_split(str, ',');
 	if (!xyz || !xyz[0] || !xyz[1] || !xyz[2] || xyz[3])
-		error_exit("Invalid vector format (x,y,z)");
+		error_exit("Invalid vector format (x,y,z).\n");
 	vec.x = ft_atof(xyz[0]);
 	vec.y = ft_atof(xyz[1]);
 	vec.z = ft_atof(xyz[2]);

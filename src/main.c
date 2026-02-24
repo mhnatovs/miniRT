@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 10:53:41 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/21 12:03:47 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:50:55 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	t_context	ctx;
 
 	if (argc != 2)
-		error_exit("Usage: ./miniRT <scene.rt>");
+		error_exit("Usage: ./miniRT <scene.rt>\n");
 	ft_memset(&ctx, 0, sizeof(t_context));
 	init_parser(argv[1], &ctx.scene);
 	ctx.mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);

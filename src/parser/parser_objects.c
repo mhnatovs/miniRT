@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 12:30:55 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/23 09:37:20 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:52:07 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	parse_sphere(char **tokens, t_scene *scene)
 	t_object	*object;
 
 	if (!tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
-		error_exit("Invalid Sphere format");
+		error_exit("Invalid Sphere format.\n");
 	sphere.center = parse_vector(tokens[1]);
 	sphere.radius = ft_atof(tokens[2]) / 2.0;
 	if (sphere.radius <= 0)
-		error_exit("Sphere radius must be positive");
+		error_exit("Sphere radius must be positive.\n");
 	sphere.color = parse_color(tokens[3]);
 	object = malloc(sizeof(t_object));
 	if (!object)
-		error_exit("Memory allocation failed");
+		error_exit("Memory allocation failed.\n");
 	object->type = OBJ_SPHERE;
 	object->color = sphere.color;
 	object->data.sphere = sphere;
@@ -39,18 +39,18 @@ void	parse_plane(char **tokens, t_scene *scene)
 	t_object	*object;
 
 	if (!tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
-		error_exit("Invalid Plane format");
+		error_exit("Invalid Plane format.\n");
 	plane.point = parse_vector(tokens[1]);
 	plane.normal = parse_vector(tokens[2]);
 	if (plane.normal.x < -1.0 || plane.normal.x > 1.0 || plane.normal.y < -1.0
 		|| plane.normal.y > 1.0 || plane.normal.z < -1.0
 		|| plane.normal.z > 1.0)
-		error_exit("Plane normal vector must be normalized");
+		error_exit("Plane normal vector must be normalized.\n");
 	plane.normal = vector_normalize(plane.normal);
 	plane.color = parse_color(tokens[3]);
 	object = malloc(sizeof(t_object));
 	if (!object)
-		error_exit("Memory allocation failed");
+		error_exit("Memory allocation failed.\n");
 	object->type = OBJ_PLANE;
 	object->color = plane.color;
 	object->data.plane = plane;
@@ -71,9 +71,9 @@ void	parse_plane(char **tokens, t_scene *scene)
 static void validate_cylinder_params(t_cylinder cyl)
 {
     if (cyl.radius <= 0)
-        error_exit("Cylinder diameter must be positive");
+        error_exit("Cylinder diameter must be positive.\n");
     if (cyl.height <= 0)
-        error_exit("Cylinder height must be positive");
+        error_exit("Cylinder height must be positive.\n");
 }
 
 static t_cylinder	create_cylinder(char **tokens)
@@ -97,11 +97,11 @@ void	parse_cylinder(char **tokens, t_scene *scene)
 
 	if (!tokens[1] || !tokens[2] || !tokens[3] || !tokens[4] || !tokens[5]
 		|| tokens[6])
-		error_exit("Invalid Cylinder format");
+		error_exit("Invalid Cylinder format.\n");
 	cyl = create_cylinder(tokens);
 	object = malloc(sizeof(t_object));
 	if (!object)
-		error_exit("Memory allocation failed");
+		error_exit("Memory allocation failed.\n");
 	object->type = OBJ_CYLINDER;
 	object->color = cyl.color;
 	object->data.cylinder = cyl;
