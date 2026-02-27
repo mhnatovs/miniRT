@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 13:29:52 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/22 13:29:56 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:49:32 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ t_hit	trace_ray(t_ray ray, t_scene scene)
 	return (hit);
 }
 
-void	render_pixel(mlx_image_t *img, t_scene scene, t_viewport vp, t_point p)
+static void	render_pixel(mlx_image_t *img, t_scene scene, t_viewport vp,
+		t_point p)
 {
 	t_ray		ray;
 	t_hit		hit;

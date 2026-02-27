@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 13:30:38 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/26 14:21:06 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:23:53 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ t_vector		get_obj_pos(t_object *o);
 void			update_pos(t_object *o, t_vector move);
 void			resolve_scaling_collision(t_context *ctx, t_object *o);
 t_hit			trace_ray_selection(t_ray ray, t_scene scene);
+void			rotate_object(t_context *ctx, mlx_key_data_t key);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 10:56:05 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/21 10:56:07 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:22:08 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	move_camera(ctx, keydata);
 	rotate_camera(ctx, keydata);
 	modify_object(ctx, keydata);
+	rotate_object(ctx, keydata);
 }
