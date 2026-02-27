@@ -31,7 +31,8 @@ To run the Raytracer with a scene description file:
 - W/S - move forward/backward
 - A/D - move left/right
 - Q/E - up/down
-- Arrow keys - rotate camera (when nothing is selected)
+- Z/X - rotate camera (when nothing is selected)
+- R/T/Y/U - rotate objects
 - Left click on object - select
 - Arrow keys - change size (when selected)
 
