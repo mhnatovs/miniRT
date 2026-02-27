@@ -6,15 +6,15 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 13:30:38 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/24 11:42:12 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/26 14:21:06 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 512
-# define HEIGHT 512
+# define WIDTH 400
+# define HEIGHT 400
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846

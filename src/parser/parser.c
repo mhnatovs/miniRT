@@ -6,11 +6,12 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 12:04:33 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/24 11:53:47 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/27 13:10:43 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
 static void	parse_ambient(char **tokens, t_scene *scene)
 {
 	if (scene->has_ambient)
@@ -34,8 +35,8 @@ static void	parse_camera(char **tokens, t_scene *scene)
 	scene->camera.dir = parse_vector(tokens[2]);
 	if (scene->camera.dir.x < -1.0 || scene->camera.dir.x > 1.0
 		|| scene->camera.dir.y < -1.0 || scene->camera.dir.y > 1.0
-		|| scene->camera.dir.z < -1.0 || scene->camera.dir.z > 1.0)	
-			error_exit("Camera direction vector must be normalized.\n");
+		|| scene->camera.dir.z < -1.0 || scene->camera.dir.z > 1.0)
+		error_exit("Camera direction vector must be normalized.\n");
 	scene->camera.dir = vector_normalize(scene->camera.dir);
 	scene->camera.fov = ft_atoi(tokens[3]);
 	if (scene->camera.fov < 0 || scene->camera.fov > 180)

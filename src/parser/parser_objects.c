@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 12:30:55 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/24 11:52:07 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/27 13:12:05 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	parse_plane(char **tokens, t_scene *scene)
 // 		error_exit("Cylinder height must be positive");
 // }
 
-static void validate_cylinder_params(t_cylinder cyl)
+static void	validate_cylinder_params(t_cylinder cyl)
 {
-    if (cyl.radius <= 0)
-        error_exit("Cylinder diameter must be positive.\n");
-    if (cyl.height <= 0)
-        error_exit("Cylinder height must be positive.\n");
+	if (cyl.radius <= 0)
+		error_exit("Cylinder diameter must be positive.\n");
+	if (cyl.height <= 0)
+		error_exit("Cylinder height must be positive.\n");
 }
 
 static t_cylinder	create_cylinder(char **tokens)

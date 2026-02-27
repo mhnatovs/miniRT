@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 21:19:29 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/23 17:37:48 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/02/27 13:12:27 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,5 @@ void	error_exit(char *msg)
 		if (write(2, msg, ft_strlen(msg)) == -1)
 			(void)0;
 	}
-	// if (write(2, "\n", 1) == -1)
-	// 	(void)0;
 	exit(1);
 }
