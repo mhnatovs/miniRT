@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 17:34:21 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/22 13:16:21 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/02 14:29:40 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ void	rotate_camera(t_context *cont, mlx_key_data_t key)
 {
 	float		angle;
 
-	if (cont->selected_obj)
-		return ;
-	angle = 0.1;
+	angle = 0.1f;
 	if (key.key == MLX_KEY_Z && (key.action == MLX_PRESS
 			|| key.action == MLX_REPEAT))
 		yaw_rotation(angle, cont);
