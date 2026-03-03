@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 13:29:52 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/22 13:29:56 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:36:43 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ float	intersect_object(t_ray ray, t_object *obj)
 	return (-1);
 }
 
-// determines the normal at the intersection point
-// depending on the type of object
 void	hit_normal(t_object *obj, t_hit *hit)
 {
 	if (obj->type == OBJ_SPHERE)
@@ -35,37 +33,12 @@ void	hit_normal(t_object *obj, t_hit *hit)
 		hit->normal = get_normal_cylinder(hit->point, obj->data.cylinder);
 }
 
-// traces a ray across the scene and finds the nearest object it intersects with
 t_hit	trace_ray(t_ray ray, t_scene scene)
 {
-	t_hit		hit;
-	t_list		*node;
-	t_object	*obj;
-	float		t;
-
-	node = scene.objects;
-	hit.t = -1.0;
-	hit.obj = NULL;
-	while (node)
-	{
-		obj = node->content;
-		t = intersect_object(ray, obj);
-		if (t > 0 && (hit.t < 0 || t < hit.t))
-		{
-			hit.t = t;
-			hit.obj = obj;
-		}
-		node = node->next;
-	}
-	if (hit.obj)
-	{
-		hit.point = vector_add(ray.origin, vector_scale(ray.direction, hit.t));
-		hit_normal(hit.obj, &hit);
-	}
-	return (hit);
+	return (traverse_bvh(ray, scene.objects));
 }
 
-void	render_pixel(mlx_image_t *img, t_scene scene, t_viewport vp, t_point p)
+uint32_t	get_pixel_color(t_scene scene, t_viewport vp, t_point p)
 {
 	t_ray		ray;
 	t_hit		hit;
@@ -77,13 +50,16 @@ void	render_pixel(mlx_image_t *img, t_scene scene, t_viewport vp, t_point p)
 		color = color_to_int(calc_color(hit, scene));
 	else
 		color = 0x000000FF;
-	mlx_put_pixel(img, p.x, p.y, color);
+	return (color);
 }
 
-void	render_scene(mlx_image_t *img, t_scene scene)
+void	render_scene(mlx_image_t *img, t_scene scene, int step)
 {
 	t_viewport	vp;
 	t_point		p;
+	uint32_t	color;
+	int			i;
+	int			j;
 
 	p.y = 0;
 	vp = init_viewport(scene.camera);
@@ -92,9 +68,23 @@ void	render_scene(mlx_image_t *img, t_scene scene)
 		p.x = 0;
 		while (p.x < WIDTH)
 		{
-			render_pixel(img, scene, vp, p);
-			p.x++;
+			color = get_pixel_color(scene, vp, p);
+			i = 0;
+			while (i < step && (p.y + i) < HEIGHT)
+			{
+				j = 0;
+				while (j < step && (p.x + j) < WIDTH)
+				{
+					if (step > 1)
+						mlx_put_pixel(img, p.x + j, p.y + i, color);
+					else
+						mlx_put_pixel(img, p.x, p.y, color);
+					j++;
+				}
+				i++;
+			}
+			p.x += step;
 		}
-		p.y++;
+		p.y += step;
 	}
 }

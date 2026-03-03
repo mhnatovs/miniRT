@@ -60,7 +60,10 @@ bool	is_colliding(t_context *ctx, t_object *o, t_vector next_pos)
 	t_list		*node;
 	t_object	*other;
 
-	node = ctx->scene.objects;
+	if (ctx->scene.objects)
+		node = ctx->scene.objects->primitives;
+	else
+		node = NULL;
 	while (node)
 	{
 		other = node->content;

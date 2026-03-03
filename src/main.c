@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 10:53:41 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/24 11:50:55 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/02 13:51:59 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ static void	resize_hook(int32_t width, int32_t height, void *param)
 	mlx_resize_image(ctx->img, width, height);
 }
 
+static void	render_loop(void *param)
+{
+	t_context	*ctx;
+
+	ctx = (t_context *)param;
+	if (ctx->needs_rerender && (mlx_get_time() - ctx->last_input_time > 0.15))
+	{
+		render_scene(ctx->img, ctx->scene, 1);
+		ctx->needs_rerender = false;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_context	ctx;
@@ -30,21 +42,22 @@ int	main(int argc, char **argv)
 	init_parser(argv[1], &ctx.scene);
 	ctx.mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
 	if (!ctx.mlx)
-		return (ft_lstclear(&ctx.scene.objects, free), 1);
+		return (free_bvh(ctx.scene.objects), 1);
 	ctx.img = mlx_new_image(ctx.mlx, WIDTH, HEIGHT);
 	if (!ctx.img)
-		return (mlx_terminate(ctx.mlx), ft_lstclear(&ctx.scene.objects, free),
+		return (mlx_terminate(ctx.mlx), free_bvh(ctx.scene.objects),
 			1);
-	render_scene(ctx.img, ctx.scene);
+	render_scene(ctx.img, ctx.scene, 1);
 	mlx_image_to_window(ctx.mlx, ctx.img, 0, 0);
 	mlx_key_hook(ctx.mlx, &key_hook, &ctx);
 	mlx_mouse_hook(ctx.mlx, &mouse_hook, &ctx);
 	mlx_cursor_hook(ctx.mlx, &cursor_hook, &ctx);
 	mlx_scroll_hook(ctx.mlx, &scroll_hook, &ctx);
 	mlx_resize_hook(ctx.mlx, &resize_hook, &ctx);
+	mlx_loop_hook(ctx.mlx, &render_loop, &ctx);
 	mlx_loop(ctx.mlx);
 	mlx_delete_image(ctx.mlx, ctx.img);
 	mlx_terminate(ctx.mlx);
-	ft_lstclear(&ctx.scene.objects, free);
+	// ft_lstclear(&ctx.scene.objects, free);
 	return (0);
 }

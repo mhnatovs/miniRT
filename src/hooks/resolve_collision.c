@@ -65,7 +65,10 @@ void	resolve_scaling_collision(t_context *ctx, t_object *o)
 
 	if (!o)
 		return ;
-	node = ctx->scene.objects;
+	if (ctx->scene.objects)
+		node = ctx->scene.objects->primitives;
+	else
+		node = NULL;
 	while (node)
 	{
 		other = node->content;

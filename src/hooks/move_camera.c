@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:34:17 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/22 13:20:15 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:41:36 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	horizontal_movement(t_context *cont, float speed)
 
 	move = vector_scale(cont->scene.camera.dir, speed);
 	cont->scene.camera.pos = vector_add(cont->scene.camera.pos, move);
+	cont->needs_rerender = true;
+	cont->last_input_time = mlx_get_time();
 	re_render(cont);
 }
 
@@ -29,6 +31,8 @@ static void	left_right_movement(t_context *cont, float speed)
 	vp = init_viewport(cont->scene.camera);
 	move = vector_scale(vp.right, speed);
 	cont->scene.camera.pos = vector_add(cont->scene.camera.pos, move);
+	cont->needs_rerender = true;
+	cont->last_input_time = mlx_get_time();
 	re_render(cont);
 }
 
@@ -38,6 +42,8 @@ static void	vertical_movement(t_context *cont, float speed)
 
 	move = (t_vector){0, speed, 0};
 	cont->scene.camera.pos = vector_add(cont->scene.camera.pos, move);
+	cont->needs_rerender = true;
+	cont->last_input_time = mlx_get_time();
 	re_render(cont);
 }
 
@@ -45,7 +51,7 @@ void	move_camera(t_context *cont, mlx_key_data_t key)
 {
 	float	speed;
 
-	speed = 2.0;
+	speed = 4.0;
 	if (key.key == MLX_KEY_W && (key.action == MLX_PRESS
 			|| key.action == MLX_REPEAT))
 		horizontal_movement(cont, speed);

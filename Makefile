@@ -28,6 +28,10 @@ SRCS = \
 	src/hooks/object_position.c \
 	src/hooks/if_colliding.c \
 	src/hooks/resolve_collision.c \
+	src/utils/free_bvh.c \
+	src/bvh/aabb.c \
+	src/bvh/build.c \
+	src/bvh/traverse.c \
 	src/utils/error_exit.c \
 	src/hooks/move_camera.c \
 	src/hooks/rotate_camera.c \

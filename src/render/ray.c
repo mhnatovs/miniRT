@@ -12,12 +12,17 @@
 
 #include "minirt.h"
 
-t_ray	make_ray(t_vector source, t_vector dir)
+t_ray	make_ray(t_vector source, t_vector direction)
 {
 	t_ray	ray;
+	double	inv_x, inv_y, inv_z;
 
 	ray.origin = source;
-	ray.direction = vector_normalize(dir);
+	ray.direction = vector_normalize(direction);
+	inv_x = (fabs(ray.direction.x) < 1e-6) ? 1e30 : 1.0f / ray.direction.x;
+	inv_y = (fabs(ray.direction.y) < 1e-6) ? 1e30 : 1.0f / ray.direction.y;
+	inv_z = (fabs(ray.direction.z) < 1e-6) ? 1e30 : 1.0f / ray.direction.z;
+	ray.inv_direction = (t_vector){inv_x, inv_y, inv_z};
 	return (ray);
 }
 
@@ -35,45 +40,14 @@ t_ray	generate_ray(t_camera cam, t_viewport v, int x, int y)
 	ray.direction = vector_add(ray.direction, vector_scale(v.right, screen_x));
 	ray.direction = vector_add(ray.direction, vector_scale(v.up, screen_y));
 	ray.direction = vector_normalize(ray.direction);
+	ray.inv_direction.x = (fabs(ray.direction.x) < 1e-6) ? 1e30 : 1.0f / ray.direction.x;
+	ray.inv_direction.y = (fabs(ray.direction.y) < 1e-6) ? 1e30 : 1.0f / ray.direction.y;
+	ray.inv_direction.z = (fabs(ray.direction.z) < 1e-6) ? 1e30 : 1.0f / ray.direction.z;
 	ray.origin = cam.pos;
 	return (ray);
 }
 
-static void	update_hit(t_hit *h, t_object *obj, t_ray ray, double t)
-{
-	if (h->obj == NULL || t < h->t)
-	{
-		h->t = t;
-		h->obj = obj;
-		h->point = vector_add(ray.origin, vector_scale(ray.direction, t));
-		hit_normal(obj, h);
-	}
-}
-
 t_hit	trace_ray_selection(t_ray ray, t_scene scene)
 {
-	t_list	*node;
-	double	t;
-	t_hit	hit[2];
-
-	node = scene.objects;
-	hit[0].t = -1.0;
-	hit[0].obj = NULL;
-	hit[1].t = -1.0;
-	hit[1].obj = NULL;
-	while (node)
-	{
-		t = intersect_object(ray, node->content);
-		if (t > 0)
-		{
-			if (((t_object *)node->content)->type == OBJ_PLANE)
-				update_hit(&hit[1], node->content, ray, t);
-			else
-				update_hit(&hit[0], node->content, ray, t);
-		}
-		node = node->next;
-	}
-	if (hit[0].obj)
-		return (hit[0]);
-	return (hit[1]);
+	return (trace_ray(ray, scene));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 17:34:21 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/22 13:16:21 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:41:39 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	yaw_rotation(float angle, t_context *cont)
 	new_dir.z = -cont->scene.camera.dir.x * sin_a
 		+ cont->scene.camera.dir.z * cos_a;
 	cont->scene.camera.dir = vector_normalize(new_dir);
+	cont->needs_rerender = true;
+	cont->last_input_time = mlx_get_time();
 	re_render(cont);
 }
 
@@ -35,7 +37,7 @@ void	rotate_camera(t_context *cont, mlx_key_data_t key)
 
 	if (cont->selected_obj)
 		return ;
-	angle = 0.1;
+	angle = 0.2;
 	if (key.key == MLX_KEY_Z && (key.action == MLX_PRESS
 			|| key.action == MLX_REPEAT))
 		yaw_rotation(angle, cont);

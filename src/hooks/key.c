@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 10:56:05 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/21 10:56:07 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/03 14:45:18 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 void	re_render(t_context *ctx)
 {
-	render_scene(ctx->img, ctx->scene);
+	int	step;
+
+	step = 1;
+	if (ctx->is_dragging)
+		step = 4;
+	if (ctx->needs_rerender) // If pending high-res render from interaction
+		step = 4;
+	render_scene(ctx->img, ctx->scene, step);
 }
 
 static void	update_object_params(t_object *o, int key, float d)
@@ -54,6 +61,8 @@ void	modify_object(t_context *ctx, mlx_key_data_t key)
 	update_object_params(o, key.key, d);
 	update_pos(o, vector_substract(ctx->intended_pos, get_obj_pos(o)));
 	resolve_scaling_collision(ctx, o);
+	ctx->needs_rerender = true;
+	ctx->last_input_time = mlx_get_time();
 	re_render(ctx);
 }
 

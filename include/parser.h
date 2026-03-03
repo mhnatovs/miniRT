@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 11:58:20 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/21 11:58:23 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/02 14:11:25 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "vector.h"
+# include "bvh.h"
 
 typedef struct s_color
 {
@@ -48,7 +49,7 @@ typedef struct s_scene
 	t_ambient		ambient;
 	t_camera		camera;
 	t_light			light;
-	t_list			*objects;
+	t_bvh_node		*objects;
 	int				has_ambient;
 	int				has_camera;
 	int				has_light;

@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 10:56:00 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/21 10:56:02 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/02 14:04:32 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static void	fov_zoom(t_context *ctx, double ydelta)
 		ctx->scene.camera.fov = 1;
 	if (ctx->scene.camera.fov > 179)
 		ctx->scene.camera.fov = 179;
-	re_render(ctx);
+	ctx->needs_rerender = true;
+	ctx->last_input_time = mlx_get_time();
+	render_scene(ctx->img, ctx->scene, 6);
 }
 
 static void	object_scale(t_context *ctx, double ydelta)
@@ -40,7 +42,9 @@ static void	object_scale(t_context *ctx, double ydelta)
 	update_pos(ctx->selected_obj, vector_substract(ctx->intended_pos,
 			get_obj_pos(ctx->selected_obj)));
 	resolve_scaling_collision(ctx, ctx->selected_obj);
-	re_render(ctx);
+	ctx->needs_rerender = true;
+	ctx->last_input_time = mlx_get_time();
+	render_scene(ctx->img, ctx->scene, 6);
 }
 
 void	scroll_hook(double xdelta, double ydelta, void *param)

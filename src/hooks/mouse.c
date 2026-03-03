@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 10:55:48 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/02/22 13:20:37 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/02 14:04:38 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ static void	handle_left_click(t_context *ctx, action_t action)
 	else if (action == MLX_RELEASE)
 	{
 		if (ctx->is_dragging)
+		{
 			ft_putstr_fd("Dragging stopped\n", 1);
+			ctx->is_dragging = false;
+			re_render(ctx); // Re-render with high quality on release
+		}
 		ctx->is_dragging = false;
 	}
 }

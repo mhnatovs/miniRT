@@ -6,15 +6,15 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 13:30:38 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/26 14:21:06 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:04:39 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 400
-# define HEIGHT 400
+# define WIDTH 900
+# define HEIGHT 800
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -33,6 +33,7 @@
 # include "parser.h"
 # include "render.h"
 # include "intersection.h"
+# include "bvh.h"
 
 typedef struct s_context
 {
@@ -42,6 +43,8 @@ typedef struct s_context
 	t_object	*selected_obj;
 	double		prev_mouse[2];
 	bool		is_dragging;
+	bool		needs_rerender;
+	double		last_input_time;
 	t_vector	intended_pos;
 }				t_context;
 

@@ -107,5 +107,6 @@ int	init_parser(char *file, t_scene *scene)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	build_bvh(scene);
 	return (0);
 }
