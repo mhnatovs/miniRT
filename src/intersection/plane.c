@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 14:36:01 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/18 17:22:47 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/05 12:06:22 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ float	intersect_plane(t_ray ray, t_plane plane)
 	t_vector	p_to_origin;
 
 	denominator = vector_dot(ray.direction, plane.normal);
+	if (denominator > 0.0001)
+		return (-1.0);
 	if (fabs(denominator) < 0.0001)
 		return (-1.0);
 	p_to_origin = vector_substract(plane.point, ray.origin);

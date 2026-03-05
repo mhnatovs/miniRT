@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 20:48:29 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/03 20:48:31 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/05 11:55:28 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,15 @@ static void	validate_cylinder_params(t_cylinder cyl)
 static t_cylinder	create_cylinder(char **tokens)
 {
 	t_cylinder	cyl;
+	t_vector	center;
 
-	cyl.base = parse_vector(tokens[1]);
+	center = parse_vector(tokens[1]);
 	cyl.dir = parse_vector(tokens[2]);
 	cyl.dir = vector_normalize(cyl.dir);
 	cyl.radius = ft_atof(tokens[3]) / 2.0;
 	cyl.height = ft_atof(tokens[4]);
 	cyl.color = parse_color(tokens[5]);
+	cyl.base = vector_add(center, vector_scale(cyl.dir, -cyl.height / 2.0));
 	validate_cylinder_params(cyl);
 	return (cyl);
 }

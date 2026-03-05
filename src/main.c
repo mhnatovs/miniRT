@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 20:48:17 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/03 20:48:18 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/05 12:10:07 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@ static void	resize_hook(int32_t width, int32_t height, void *param)
 	t_context	*ctx;
 
 	ctx = param;
-	mlx_resize_image(ctx->img, width, height);
-}
-
-static void	render_loop(void *param)
-{
-	t_context	*ctx;
-
-	ctx = (t_context *)param;
-	if (ctx->needs_rerender && (mlx_get_time() - ctx->last_input_time > 0.15))
+	mlx_delete_image(ctx->mlx, ctx->img);
+	ctx->img = mlx_new_image(ctx->mlx, width, height);
+	if (!ctx->img)
 	{
-		render_scene(ctx->img, ctx->scene, 1);
-		ctx->needs_rerender = false;
+		mlx_terminate(ctx->mlx);
+		free_bvh(ctx->scene.objects);
+		exit(1);
 	}
+	mlx_image_to_window(ctx->mlx, ctx->img, 0, 0);
+	render_scene(ctx->img, ctx->scene, 1);
 }
 
 static void	setup_hooks(t_context *ctx)
@@ -37,7 +34,6 @@ static void	setup_hooks(t_context *ctx)
 	mlx_key_hook(ctx->mlx, &key_hook, ctx);
 	mlx_scroll_hook(ctx->mlx, &scroll_hook, ctx);
 	mlx_resize_hook(ctx->mlx, &resize_hook, ctx);
-	mlx_loop_hook(ctx->mlx, &render_loop, ctx);
 }
 
 int	main(int argc, char **argv)

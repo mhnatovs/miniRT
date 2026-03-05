@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_scroll.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 20:49:07 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/03 20:49:09 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/05 12:07:21 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ static void	fov_zoom(t_context *ctx, double ydelta)
 		ctx->scene.camera.fov = 1;
 	if (ctx->scene.camera.fov > 179)
 		ctx->scene.camera.fov = 179;
-	ctx->needs_rerender = true;
-	ctx->last_input_time = mlx_get_time();
-	render_scene(ctx->img, ctx->scene, 6);
+	render_scene(ctx->img, ctx->scene, 1);
 }
 
 void	scroll_hook(double xdelta, double ydelta, void *param)
