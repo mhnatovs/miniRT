@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/14 15:01:05 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/18 17:32:17 by mhnatovs         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -58,35 +47,53 @@ t_color	apply_ambient(t_color obj_color, t_ambient ambient)
 t_color	apply_diffuse(t_hit hit, t_light light)
 {
 	t_color		diffuse;
-	t_vector	light_dir;
+	t_vector	l_dir;
 	float		brightness;
 
-	light_dir = vector_substract(light.pos, hit.point);
-	light_dir = vector_normalize(light_dir);
-	brightness = vector_dot(hit.normal, light_dir);
-	if (brightness < 0)
-		brightness = 0;
-	brightness *= light.ratio;
+	l_dir = vector_normalize(vector_substract(light.pos, hit.point));
+	brightness = fmax(0.0f, vector_dot(hit.normal, l_dir)) * light.ratio;
 	diffuse.r = hit.obj->color.r * light.color.r * brightness;
 	diffuse.g = hit.obj->color.g * light.color.g * brightness;
 	diffuse.b = hit.obj->color.b * light.color.b * brightness;
 	return (diffuse);
 }
 
+t_color	apply_specular(t_hit hit, t_light light, t_vector view_dir)
+{
+	t_vector	l_dir;
+	t_vector	reflect_dir;
+	float		spec;
+	float		ks;
+	int			n;
+
+	ks = 0.5f;
+	n = 50;
+	l_dir = vector_normalize(vector_substract(light.pos, hit.point));
+	reflect_dir = vector_substract(vector_scale(hit.normal,
+				2.0f * vector_dot(l_dir, hit.normal)), l_dir);
+	spec = pow(fmax(0.0f, vector_dot(view_dir, reflect_dir)), n);
+	return ((t_color){light.color.r * light.ratio * ks * spec,
+		light.color.g * light.ratio * ks * spec,
+		light.color.b * light.ratio * ks * spec});
+}
+
 // calculates the final color at the intersection
 // point: ambient + diffuse lighting (including shadows)
-t_color	calc_color(t_hit hit, t_scene scene)
+t_color	calc_color(t_hit hit, t_scene scene, t_vector view_dir)
 {
 	t_color	ambient;
 	t_color	diffuse;
+	t_color	specular;
 	t_color	final;
 
 	ambient = apply_ambient(hit.obj->color, scene.ambient);
 	if (in_shadow(hit, scene))
 		return (ambient);
 	diffuse = apply_diffuse(hit, scene.light);
-	final.r = ambient.r + diffuse.r;
-	final.g = ambient.g + diffuse.g;
-	final.b = ambient.b + diffuse.b;
+	specular = apply_specular(hit, scene.light,
+			vector_scale(view_dir, -1.0f));
+	final.r = ambient.r + diffuse.r + specular.r;
+	final.g = ambient.g + diffuse.g + specular.g;
+	final.b = ambient.b + diffuse.b + specular.b;
 	return (final);
 }

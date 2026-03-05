@@ -20,22 +20,22 @@ SRCS = \
 	src/render/ray.c \
 	src/render/viewport.c \
 	src/render/scene.c \
+	src/render/hit_logic.c \
 	src/render/color.c \
 	src/render/shadows.c \
 	src/hooks/key.c \
-	src/hooks/mouse.c \
 	src/hooks/mouse_scroll.c \
-	src/hooks/object_position.c \
-	src/hooks/if_colliding.c \
-	src/hooks/resolve_collision.c \
 	src/utils/free_bvh.c \
 	src/bvh/aabb.c \
+	src/bvh/aabb_utils.c \
 	src/bvh/build.c \
+	src/bvh/build_utils.c \
+	src/bvh/build_utils_extra.c \
+	src/bvh/intersect_primitives.c \
 	src/bvh/traverse.c \
 	src/utils/error_exit.c \
 	src/hooks/move_camera.c \
-	src/hooks/rotate_camera.c \
-	src/hooks/move_object.c
+	src/hooks/rotate_camera.c
 
 OBJDIR = obj
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

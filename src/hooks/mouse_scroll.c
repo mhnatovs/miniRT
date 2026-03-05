@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/21 10:56:00 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/02 14:04:32 by jiyawang         ###   ########.fr       */
+/*   Created: 2026/03/03 20:49:07 by jiyawang          #+#    #+#             */
+/*   Updated: 2026/03/03 20:49:09 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,6 @@ static void	fov_zoom(t_context *ctx, double ydelta)
 	render_scene(ctx->img, ctx->scene, 6);
 }
 
-static void	object_scale(t_context *ctx, double ydelta)
-{
-	float	scale;
-
-	if (ydelta > 0)
-		scale = 1.05f;
-	else
-		scale = 0.95f;
-	if (ctx->selected_obj->type == OBJ_SPHERE)
-		ctx->selected_obj->data.sphere.radius *= scale;
-	else if (ctx->selected_obj->type == OBJ_CYLINDER)
-	{
-		ctx->selected_obj->data.cylinder.radius *= scale;
-		ctx->selected_obj->data.cylinder.height *= scale;
-	}
-	update_pos(ctx->selected_obj, vector_substract(ctx->intended_pos,
-			get_obj_pos(ctx->selected_obj)));
-	resolve_scaling_collision(ctx, ctx->selected_obj);
-	ctx->needs_rerender = true;
-	ctx->last_input_time = mlx_get_time();
-	render_scene(ctx->img, ctx->scene, 6);
-}
-
 void	scroll_hook(double xdelta, double ydelta, void *param)
 {
 	t_context	*ctx;
@@ -55,8 +32,5 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	ctx = (t_context *)param;
 	if (!ctx)
 		return ;
-	if (!ctx->selected_obj)
-		fov_zoom(ctx, ydelta);
-	else
-		object_scale(ctx, ydelta);
+	fov_zoom(ctx, ydelta);
 }

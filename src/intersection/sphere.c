@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyan <jiyan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:13:57 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/18 17:26:45 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/04 20:50:33 by jiyan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,24 @@
 // coef[2] = distance from ray origin to sphere center minus radius squared
 float	intersect_sphere(t_ray ray, t_sphere sphere)
 {
-	t_vector	oc;
-	float		coef[3];
-	float		t;
+	t_vector	l;
+	float		tca;
+	float		d2;
+	float		thc;
+	float		t[2];
 
-	oc = vector_substract(ray.origin, sphere.center);
-	coef[0] = vector_dot(ray.direction, ray.direction);
-	coef[1] = 2.0 * vector_dot(oc, ray.direction);
-	coef[2] = vector_dot(oc, oc) - sphere.radius * sphere.radius;
-	t = coef[1] * coef[1] - 4 * coef[0] * coef[2];
-	if (t < 0)
+	l = vector_substract(sphere.center, ray.origin);
+	tca = vector_dot(l, ray.direction);
+	d2 = vector_dot(l, l) - tca * tca;
+	if (d2 > sphere.radius * sphere.radius)
 		return (-1.0);
-	t = (-coef[1] - sqrt(t)) / (2.0 * coef[0]);
-	if (t < 0)
-		t = (-coef[1] + sqrt(t)) / (2.0 * coef[0]);
-	if (t >= 0)
-		return (t);
+	thc = sqrt(sphere.radius * sphere.radius - d2);
+	t[0] = tca - thc;
+	t[1] = tca + thc;
+	if (t[0] > 0.001f)
+		return (t[0]);
+	if (t[1] > 0.001f)
+		return (t[1]);
 	return (-1.0);
 }
 

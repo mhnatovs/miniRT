@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rotate_camera.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 17:34:21 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/03/03 13:41:39 by jiyawang         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -35,8 +24,6 @@ void	rotate_camera(t_context *cont, mlx_key_data_t key)
 {
 	float		angle;
 
-	if (cont->selected_obj)
-		return ;
 	angle = 0.2;
 	if (key.key == MLX_KEY_Z && (key.action == MLX_PRESS
 			|| key.action == MLX_REPEAT))

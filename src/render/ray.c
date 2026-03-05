@@ -1,28 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/12 16:13:15 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/21 11:24:34 by jiyawang         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
+
+static float	safe_inv(float d)
+{
+	if (fabs(d) < 1e-6)
+		return (1e30);
+	return (1.0f / d);
+}
+
+static void	set_inv_direction(t_ray *ray)
+{
+	ray->inv_direction.x = safe_inv(ray->direction.x);
+	ray->inv_direction.y = safe_inv(ray->direction.y);
+	ray->inv_direction.z = safe_inv(ray->direction.z);
+}
 
 t_ray	make_ray(t_vector source, t_vector direction)
 {
 	t_ray	ray;
-	double	inv_x, inv_y, inv_z;
 
 	ray.origin = source;
 	ray.direction = vector_normalize(direction);
-	inv_x = (fabs(ray.direction.x) < 1e-6) ? 1e30 : 1.0f / ray.direction.x;
-	inv_y = (fabs(ray.direction.y) < 1e-6) ? 1e30 : 1.0f / ray.direction.y;
-	inv_z = (fabs(ray.direction.z) < 1e-6) ? 1e30 : 1.0f / ray.direction.z;
-	ray.inv_direction = (t_vector){inv_x, inv_y, inv_z};
+	set_inv_direction(&ray);
 	return (ray);
 }
 
@@ -40,9 +38,7 @@ t_ray	generate_ray(t_camera cam, t_viewport v, int x, int y)
 	ray.direction = vector_add(ray.direction, vector_scale(v.right, screen_x));
 	ray.direction = vector_add(ray.direction, vector_scale(v.up, screen_y));
 	ray.direction = vector_normalize(ray.direction);
-	ray.inv_direction.x = (fabs(ray.direction.x) < 1e-6) ? 1e30 : 1.0f / ray.direction.x;
-	ray.inv_direction.y = (fabs(ray.direction.y) < 1e-6) ? 1e30 : 1.0f / ray.direction.y;
-	ray.inv_direction.z = (fabs(ray.direction.z) < 1e-6) ? 1e30 : 1.0f / ray.direction.z;
+	set_inv_direction(&ray);
 	ray.origin = cam.pos;
 	return (ray);
 }

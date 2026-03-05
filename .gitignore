@@ -1,4 +1,6 @@
+
 miniRT
+.vscode
 *.o
 *.a
 a.out

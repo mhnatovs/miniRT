@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/14 14:53:21 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/20 10:09:09 by jiyawang         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
@@ -61,6 +50,9 @@ typedef struct s_cyl_tmp
 t_ray			make_ray(t_vector source, t_vector direction);
 t_ray			generate_ray(t_camera cam, t_viewport v, int x, int y);
 t_hit			traverse_bvh(t_ray ray, t_bvh_node *node);
+t_hit			intersect_primitives(t_ray ray, t_list *primitives);
+float			intersect_aabb_dist(t_ray ray, t_aabb box);
+float			get_node_dist(t_ray ray, t_bvh_node *node);
 t_hit			trace_ray(t_ray ray, t_scene scene);
 t_viewport		init_viewport(t_camera cam);
 uint32_t		get_pixel_color(t_scene scene, t_viewport vp, t_point p);
@@ -69,6 +61,6 @@ uint32_t		color_to_int(t_color color);
 t_color			apply_ambient(t_color obj_color, t_ambient ambient);
 t_color			apply_diffuse(t_hit hit, t_light light);
 int				in_shadow(t_hit hit, t_scene scene);
-t_color			calc_color(t_hit hit, t_scene scene);
+t_color			calc_color(t_hit hit, t_scene scene, t_vector view_dir);
 
 #endif
