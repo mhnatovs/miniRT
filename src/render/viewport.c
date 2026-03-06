@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 19:07:50 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/03/05 12:09:24 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/06 13:12:14 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_viewport	init_viewport(t_camera cam)
 	t_vector	forward;
 
 	vp.aspect_ratio = (float)WIDTH / (float)HEIGHT;
+	vp.height = HEIGHT;
+	vp.width = WIDTH;
 	vp.fov_scale = tan(cam.fov * 0.5 * M_PI / 180.0);
 	forward = vector_normalize(cam.dir);
 	vp.forward = forward;

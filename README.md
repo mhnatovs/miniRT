@@ -21,19 +21,18 @@ make
 ```
 This will build the `MLX42` library and the `miniRT` executable.
 
-### Execution
+**Usage:**
 To run the Raytracer with a scene description file:
 ```bash
 ./miniRT scenes/scene.rt
 ```
-- **Controls**:
-- Press `ESC` to close the window and exit the program.
-- W/S - move forward/backward
-- A/D - move left/right
-- Q/E - up/down
-- Arrow keys - rotate camera (when nothing is selected)
-- Left click on object - select
-- Arrow keys - change size (when selected)
+**Controls**:
+- `ESC` - close the window and exit the program.
+- `W/S` - move camera forward/backward
+- `A/D` - move camera left/right
+- `Q/E` - move camera up/down
+- `Z/X` - rotate camera
+- `Scroll` - Zoom (FOV)
 
 ### Scene Format
 The project uses `.rt` files to define scenes. Each line represents a scene element:
