@@ -13,7 +13,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 900
+# define WIDTH 800
 # define HEIGHT 600
 
 # ifndef M_PI
