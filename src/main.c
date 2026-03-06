@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 20:48:17 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/05 12:10:07 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:02:53 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ static void	resize_hook(int32_t width, int32_t height, void *param)
 {
 	t_context	*ctx;
 
+	(void)width;
+	(void)height;
 	ctx = param;
-	mlx_delete_image(ctx->mlx, ctx->img);
-	ctx->img = mlx_new_image(ctx->mlx, width, height);
+	if (!ctx || !ctx->mlx)
+		return ;
+	if (ctx->img)
+		mlx_delete_image(ctx->mlx, ctx->img);
+	ctx->img = mlx_new_image(ctx->mlx, WIDTH, HEIGHT);
 	if (!ctx->img)
-	{
-		mlx_terminate(ctx->mlx);
-		free_bvh(ctx->scene.objects);
-		exit(1);
-	}
-	mlx_image_to_window(ctx->mlx, ctx->img, 0, 0);
+		return ;
+	if (mlx_image_to_window(ctx->mlx, ctx->img, 0, 0) < 0)
+		return ;
 	render_scene(ctx->img, ctx->scene, 1);
 }
 
@@ -56,5 +58,6 @@ int	main(int argc, char **argv)
 	mlx_loop(ctx.mlx);
 	mlx_delete_image(ctx.mlx, ctx.img);
 	mlx_terminate(ctx.mlx);
+	free_bvh(ctx.scene.objects);
 	return (0);
 }
