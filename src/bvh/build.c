@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 10:47:06 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/04 10:47:08 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:15:14 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,21 @@ static t_bvh_node	*build_bvh_recursive(t_object **objects, int count)
 	sort_objects(objects, count, axis);
 	mid = count / 2;
 	return (init_internal_node(build_bvh_recursive(objects, mid),
-			build_bvh_recursive(objects + mid, count - mid)));
+			build_bvh_recursive(objects + mid, count
+				- mid)));
+}
+
+static void	clear_list_no_free(t_list **lst)
+{
+	t_list	*tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
+	}
+	*lst = NULL;
 }
 
 void	build_bvh(t_scene *scene)
@@ -69,7 +83,7 @@ void	build_bvh(t_scene *scene)
 		obj_array[i++] = (t_object *)curr->content;
 		curr = curr->next;
 	}
-	ft_lstclear(&scene->objects->primitives, NULL);
+	clear_list_no_free(&scene->objects->primitives);
 	free(scene->objects);
 	root = build_bvh_recursive(obj_array, count);
 	scene->objects = root;

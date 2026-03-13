@@ -1,0 +1,22 @@
+# A 0.2 255,255,255
+# C 0,0,-10 0,0,1 70
+# L -5,5,-5 0.8 255,255,255
+# sp 0,0,0 2 150,255,150
+
+# Ambient light
+A 0.2 255,255,255
+
+# Camera facing the objects
+C 0,0,20 0,0,-1 70
+
+# Light source
+L 10,10,20 0.8 255,255,255
+
+# Sphere at (0,0,0) [cite: 82]
+sp 0,0,0 10 255,0,0
+
+# Plane at z=0 [cite: 89]
+pl 0,0,-5 0,0,1 0,255,0
+
+# Cylinder along y-axis [cite: 92, 93]
+cy 15,0,0 0,1,0 5 15 0,0,255

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 13:03:37 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/03/06 13:03:40 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/03/13 14:47:22 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 10
+# define HEIGHT 10
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
