@@ -107,4 +107,6 @@ re: fclean all
 v: $(NAME)
 	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/test_multi_objects.rt                        
 
+vs: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) scenes/test_multi_objects.rt 2> valgrind.log
 .PHONY: all clean fclean re v
