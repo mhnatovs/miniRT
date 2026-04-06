@@ -92,4 +92,3 @@ The project represents genuine learning and comprehension of ray tracing princip
 
 - **mhnatovs** - Ray tracing engine, mathematics, lighting
 - **jiyawang** - Parser, MLX integration, memory management
-```
