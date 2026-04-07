@@ -100,13 +100,14 @@ fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
 	@rm -f $(NAME)
 	@rm -rf $(MLX42_DIR)/build
+	@rm -f valgrind.log
 	@echo "$(R)[FCLEAN]$(NC) $(NAME) has been deleted!"
-
+	@echo "$(R)[FCLEAN]$(NC) valgrind.log deleted!"
 re: fclean all
 
 v: $(NAME)
-	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/test_multi_objects.rt                        
+	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/test_sphere_orig.rt                        
 
 vs: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) scenes/test_multi_objects.rt 2> valgrind.log
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) scenes/test_sphere_orig.rt 2> valgrind.log
 .PHONY: all clean fclean re v
