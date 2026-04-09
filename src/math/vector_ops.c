@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 12:46:35 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/12 21:18:10 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/04/09 14:46:58 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_vector	vector_scale(t_vector v, float k)
 }
 
 //The dot product (or scalar product)
+//  shows the direction in which two vectors point
+// dot == 0 is perpendicular; <0 - oposite; >0 same direction
 float	vector_dot(t_vector a, t_vector b)
 {
 	float	res;
@@ -52,6 +54,7 @@ float	vector_dot(t_vector a, t_vector b)
 }
 
 // Cross product
+// returns vector, perpendicular to both vectors
 t_vector	vector_cross(t_vector a, t_vector b)
 {
 	t_vector	result;
