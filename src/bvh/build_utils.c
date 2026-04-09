@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 10:46:54 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/04 10:47:00 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/04/09 10:04:15 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,28 @@ int	get_split_axis(t_object **objects, int count)
 
 void	sort_objects(t_object **objects, int count, int axis)
 {
-	if (axis == 0)
-		qsort(objects, count, sizeof(t_object *), compare_x);
-	else if (axis == 1)
-		qsort(objects, count, sizeof(t_object *), compare_y);
-	else
-		qsort(objects, count, sizeof(t_object *), compare_z);
+	int			i;
+	int			j;
+	t_object	*key;
+
+	i = 1;
+	while (i < count)
+	{
+		key = objects[i];
+		j = i - 1;
+		while (j >= 0)
+		{
+			if (axis == 0 && compare_x(&objects[j], &key) > 0)
+				objects[j + 1] = objects[j];
+			else if (axis == 1 && compare_y(&objects[j], &key) > 0)
+				objects[j + 1] = objects[j];
+			else if (axis == 2 && compare_z(&objects[j], &key) > 0)
+				objects[j + 1] = objects[j];
+			else
+				break ;
+			j--;
+		}
+		objects[j + 1] = key;
+		i++;
+	}
 }
