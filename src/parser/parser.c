@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 20:48:41 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/13 14:56:07 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/03/03 20:48:43 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ int	init_parser(char *file, t_scene *scene)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	build_bvh(scene);
 	return (0);
 }

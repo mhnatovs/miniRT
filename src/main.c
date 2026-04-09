@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 20:48:17 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/06 17:02:53 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/04/09 12:52:50 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,17 @@ int	main(int argc, char **argv)
 	init_parser(argv[1], &ctx.scene);
 	ctx.mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
 	if (!ctx.mlx)
-		return (free_bvh(ctx.scene.objects), 1);
+		return (ft_lstclear(&ctx.scene.objects, free), 1);
 	ctx.img = mlx_new_image(ctx.mlx, WIDTH, HEIGHT);
 	if (!ctx.img)
-		return (mlx_terminate(ctx.mlx), free_bvh(ctx.scene.objects), 1);
+		return (mlx_terminate(ctx.mlx), ft_lstclear(&ctx.scene.objects, free),
+			1);
 	render_scene(ctx.img, ctx.scene, 1);
 	mlx_image_to_window(ctx.mlx, ctx.img, 0, 0);
 	setup_hooks(&ctx);
 	mlx_loop(ctx.mlx);
 	mlx_delete_image(ctx.mlx, ctx.img);
 	mlx_terminate(ctx.mlx);
-	free_bvh(ctx.scene.objects);
+	ft_lstclear(&ctx.scene.objects, free);
 	return (0);
 }

@@ -1,22 +1,5 @@
-# A 0.3 255,255,255
-# C 20,5,20 -0.7,-0.2,-0.7 70
-# L 0,20,0 0.8 255,255,255
-# pl 0,-10,0 0,1,0 200,200,200
-# sp 0,0,0 10 255,0,0
-
-
-A 0.1 255,255,255
-# Camera side view to see sphere and its shadow on the plane [cite: 156]
-C 20,20,20 -1,-1,-1 70
-
-# Spot light positioned to create shadow [cite: 154, 155]
+A 0.3 255,255,255
+C 20,5,20 -0.7,-0.2,-0.7 70
 L 0,20,0 0.8 255,255,255
-
-# Sphere that will cast a shadow [cite: 154]
-sp 0,5,0 5 255,0,0
-
-# Plane to catch the shadow [cite: 154]
-pl 0,0,0 0,1,0 200,200,200
-
-# Another sphere lit sideways from the camera's perspective [cite: 139]
-sp -15,5,0 5 0,255,0
+pl 0,-10,0 0,1,0 200,200,200
+sp 0,0,0 10 255,0,0

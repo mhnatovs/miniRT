@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_primitives.c                             :+:      :+:    :+:   */
+/*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 14:11:26 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/06 14:11:28 by jiyawang         ###   ########.fr       */
+/*   Created: 2026/03/08 21:00:00 by jiyawang          #+#    #+#             */
+/*   Updated: 2026/03/08 21:00:00 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,9 @@ t_hit	intersect_primitives(t_ray ray, t_list *primitives)
 		curr = curr->next;
 	}
 	return (hit);
+}
+
+t_hit	trace_ray(t_ray ray, t_scene scene)
+{
+	return (intersect_primitives(ray, scene.objects));
 }

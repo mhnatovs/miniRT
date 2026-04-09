@@ -25,14 +25,7 @@ SRCS = \
 	src/render/shadows.c \
 	src/hooks/key.c \
 	src/hooks/mouse_scroll.c \
-	src/utils/free_bvh.c \
-	src/bvh/aabb.c \
-	src/bvh/aabb_utils.c \
-	src/bvh/build.c \
-	src/bvh/build_utils.c \
-	src/bvh/build_utils_extra.c \
-	src/bvh/intersect_primitives.c \
-	src/bvh/traverse.c \
+	src/render/trace_ray.c \
 	src/utils/error_exit.c \
 	src/hooks/move_camera.c \
 	src/hooks/rotate_camera.c
@@ -49,7 +42,6 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 MLX42_DIR = MLX42
 MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
-
 MLX42_FLAGS = -ldl -lglfw -pthread -lm
 
 # ================= INCLUDES ==============
@@ -100,14 +92,11 @@ fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
 	@rm -f $(NAME)
 	@rm -rf $(MLX42_DIR)/build
-	@rm -f valgrind.log
 	@echo "$(R)[FCLEAN]$(NC) $(NAME) has been deleted!"
-	@echo "$(R)[FCLEAN]$(NC) valgrind.log deleted!"
+
 re: fclean all
 
 v: $(NAME)
 	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/test_sphere_orig.rt                        
 
-vs: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) scenes/test_sphere_orig.rt 2> valgrind.log
 .PHONY: all clean fclean re v

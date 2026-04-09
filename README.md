@@ -54,7 +54,6 @@ cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255
 ```
 
 ## Resources
-- [BVH](https://jacco.ompf2.com/2022/04/13/how-to-build-a-bvh-part-1-basics/): How to build a BVH.
 - [Scratchapixel](https://www.scratchapixel.com/): Comprehensive guides on computer graphics and ray tracing.
 - [Ray Tracing in One Weekend](https://raytracing.github.io/): A popular tutorial series for building a ray tracer from scratch.
 
@@ -87,8 +86,3 @@ AI was used during development for:
 All mathematical formulas were derived step-by-step with explanations.
 Every function was written by hand after understanding the underlying logic.
 The project represents genuine learning and comprehension of ray tracing principles.
-
-## Team
-
-- **mhnatovs** - Ray tracing engine, mathematics, lighting
-- **jiyawang** - Parser, MLX integration, memory management

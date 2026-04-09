@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include "vector.h"
-# include "bvh.h"
 
 typedef struct s_color
 {
@@ -49,7 +48,7 @@ typedef struct s_scene
 	t_ambient		ambient;
 	t_camera		camera;
 	t_light			light;
-	t_bvh_node		*objects;
+	t_list			*objects;
 	int				has_ambient;
 	int				has_camera;
 	int				has_light;
