@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:06:28 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/03/05 12:06:38 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/04/10 12:15:00 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static void	yaw_rotation(float angle, t_context *cont)
 	new_dir.z = -cont->scene.camera.dir.x * sin_a
 		+ cont->scene.camera.dir.z * cos_a;
 	cont->scene.camera.dir = vector_normalize(new_dir);
-	cont->needs_rerender = true;
-	cont->last_input_time = mlx_get_time();
 	re_render(cont);
 }
 

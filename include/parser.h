@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 20:51:18 by jiyawang          #+#    #+#             */
-/*   Updated: 2026/03/03 20:51:20 by jiyawang         ###   ########.fr       */
+/*   Updated: 2026/04/14 15:19:53 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-
 # include "../libft/libft.h"
 # include "vector.h"
 
@@ -66,7 +65,6 @@ typedef struct s_plane
 	t_vector		point;
 	t_vector		normal;
 	t_color			color;
-	float			opacity;
 }					t_plane;
 
 typedef struct s_cylinder

@@ -75,9 +75,6 @@ AI was used during development for:
 - Identifying logic errors in intersection calculations
 - Reviewing code structure
 
-**Code review:**
-- Suggesting better variable names for clarity
-
 **What we did NOT use AI for:**
 - Writing complete functions (we wrote all code ourselves)
 - Copy-pasting solutions without understanding

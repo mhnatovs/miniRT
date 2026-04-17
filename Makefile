@@ -2,7 +2,6 @@ NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3
-#-ffast-math -flto
 
 # ================= FILES =================
 
@@ -20,7 +19,6 @@ SRCS = \
 	src/render/ray.c \
 	src/render/viewport.c \
 	src/render/scene.c \
-	src/render/hit_logic.c \
 	src/render/color.c \
 	src/render/shadows.c \
 	src/hooks/key.c \
@@ -92,11 +90,15 @@ fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
 	@rm -f $(NAME)
 	@rm -rf $(MLX42_DIR)/build
+	@rm -f valgrind_output.txt
 	@echo "$(R)[FCLEAN]$(NC) $(NAME) has been deleted!"
 
 re: fclean all
 
 v: $(NAME)
-	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/test_sphere_orig.rt                        
+	valgrind --leak-check=full --track-fds=yes ./$(NAME) scenes/test_sphere_orig.rt
 
-.PHONY: all clean fclean re v
+vs: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) scenes/test_sphere_orig.rt > valgrind_output.txt 2>&1
+
+.PHONY: all clean fclean re v vs

@@ -6,29 +6,30 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 16:35:30 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/03/06 16:35:35 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/04/14 12:15:20 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// coef[0] = length of the ray direction (usually 1 if normalized)
-// coef[1] = how much the ray is pointing toward the sphere (oc · direction * 2)
-// coef[2] = distance from ray origin to sphere center minus radius squared
+// t[0] - entry hit
+// t[1] - exit hit
+// tca - distance along the ray to the point closest to the sphere center
+// thc - half chord length
 float	intersect_sphere(t_ray ray, t_sphere sphere)
 {
-	t_vector	l;
+	t_vector	ray_to_sphere;
 	float		tca;
-	float		d2;
+	float		dist2;
 	float		thc;
 	float		t[2];
 
-	l = vector_substract(sphere.center, ray.origin);
-	tca = vector_dot(l, ray.direction);
-	d2 = vector_dot(l, l) - tca * tca;
-	if (d2 > sphere.radius * sphere.radius)
+	ray_to_sphere = vector_substract(sphere.center, ray.origin);
+	tca = vector_dot(ray_to_sphere, ray.direction);
+	dist2 = vector_dot(ray_to_sphere, ray_to_sphere) - tca * tca;
+	if (dist2 > sphere.radius * sphere.radius)
 		return (-1.0);
-	thc = sqrt(sphere.radius * sphere.radius - d2);
+	thc = sqrt(sphere.radius * sphere.radius - dist2);
 	t[0] = tca - thc;
 	t[1] = tca + thc;
 	if (t[0] > 0.001f)

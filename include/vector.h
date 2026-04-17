@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 14:44:32 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/02/20 14:26:08 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:54:11 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
-
 # include <math.h>
 
 typedef struct s_vector

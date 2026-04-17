@@ -6,7 +6,7 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:12:03 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/03/06 17:13:17 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:38:03 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ t_color	apply_diffuse(t_hit hit, t_light light)
 // high (100–500)	small, bright glare (polished metal)
 // very high (1000+) almost mirror-like glare
 // line 96
+// ks - mirror reflection coefficient (determines
+// how strong the shine on the surface will be)
 t_color	apply_specular(t_hit hit, t_light light, t_vector view_dir)
 {
 	t_vector	l_dir;

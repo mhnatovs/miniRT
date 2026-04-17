@@ -6,17 +6,14 @@
 /*   By: mhnatovs <mhnatovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 13:03:45 by mhnatovs          #+#    #+#             */
-/*   Updated: 2026/03/06 13:03:49 by mhnatovs         ###   ########.fr       */
+/*   Updated: 2026/04/14 12:17:09 by mhnatovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
-
 # include "minirt.h"
 
-// virtual camera viewport parameters: FOV scale, aspect ratio,
-// and orientation vectors (forward/right/up) for ray construction
 typedef struct s_viewport
 {
 	float		fov_scale;
@@ -32,7 +29,6 @@ typedef struct s_ray
 {
 	t_vector	origin;
 	t_vector	direction;
-	t_vector	inv_direction;
 }				t_ray;
 
 typedef struct s_point
@@ -41,6 +37,7 @@ typedef struct s_point
 	int			y;
 }				t_point;
 
+// t - distance ahead
 typedef struct s_hit
 {
 	float		t;
@@ -72,6 +69,5 @@ t_color			apply_ambient(t_color obj_color, t_ambient ambient);
 t_color			apply_diffuse(t_hit hit, t_light light);
 int				in_shadow(t_hit hit, t_scene scene);
 t_color			calc_color(t_hit hit, t_scene scene, t_vector view_dir);
-t_viewport		init_viewport_with_dims(t_camera cam, int width, int height);
 
 #endif
